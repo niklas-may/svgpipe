@@ -1,0 +1,25 @@
+{
+  "name": "svgpipe",
+  "version": "0.0.1",
+  "description": "",
+  "main": "src/main.ts",
+  "scripts": {
+    "dev:test": "vitest"
+  },
+  "keywords": [],
+  "author": "https://github.com/niklas-may",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.2.0",
+    "@types/svgo": "^3.0.0",
+    "typescript": "^5.5.4",
+    "vitest": "^2.0.5"
+  },
+  "dependencies": {
+    "change-case": "^5.4.4",
+    "defu": "^6.1.4",
+    "knitwork": "^1.1.0",
+    "prettier": "^3.3.3",
+    "svgo": "^3.3.2"
+  }
+}
