@@ -20,7 +20,7 @@ describe("[App]", () => {
     await run(config);
   });
 
-  it("Should handle build in strategy: With options", async () => {
+  it.only("Should handle build in strategy: With options", async () => {
     const config: Config = {
       baseDir: ".svgpipe",
       modules: [

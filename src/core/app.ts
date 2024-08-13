@@ -14,9 +14,8 @@ export async function run(config: Config) {
 async function processModule(module: ModuleConfig, config: Config) {
   const svgs: File[] = [];
 
-  readInput(module, async ({ content, path }) => {
+  await readInput(module, async ({ content, path }) => {
     const { data } = optimize(content, { path, ...module.svgo });
-
     const svg = new File({
       name: parse(basename(path)).name,
       content: data,
