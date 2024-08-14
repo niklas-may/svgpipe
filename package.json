@@ -1,7 +1,17 @@
 {
   "name": "svgpipe",
   "version": "0.0.6",
-  "description": "",
+  "description": "A flexible CLI tool around svgo for further postprocessing.",
+  "keywords": [
+    "svg",
+    "svgo",
+    "cli",
+    "vue",
+    "component",
+    "icon"
+  ],
+  "author": "https://github.com/niklas-may",
+  "license": "MIT",
   "type": "module",
   "main": "./dist/main.cjs",
   "exports": {
@@ -24,9 +34,6 @@
     "test": "vitest run",
     "release": "pnpm test && pnpm build && changelogen --release && npm publish && git push --follow-tags"
   },
-  "keywords": [],
-  "author": "https://github.com/niklas-may",
-  "license": "MIT",
   "packageManager": "pnpm@9.5.0",
   "devDependencies": {
     "@types/lodash": "^4.17.7",
