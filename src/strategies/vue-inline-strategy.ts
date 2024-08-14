@@ -78,7 +78,7 @@ export class VueInlineStrategy implements IStrategy {
   }
 
   private addComponent(file: IFile) {
-    this.components.push(`<${this.getComponentNameString(file)} v-if="name === '${kebabCase(file.name)}'" />`);
+    this.components.push(`<${this.getComponentNameString(file)} v-if="name === '${kebabCase(file.name)}'" v-bind="$attrs" />`);
   }
 
   private addType(file: IFile) {
