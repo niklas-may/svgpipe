@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.4
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.3...v0.0.4)
+
+### 🏡 Chore
+
+- Release script update ([d960587](https://github.com/niklas-may/svgpipe/commit/d960587))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.3
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.2...v0.0.3)
