@@ -2,23 +2,47 @@
   "name": "svgpipe",
   "version": "0.0.1",
   "description": "",
-  "main": "src/main.ts",
+  "type": "module",
+  "main": "./dist/main.cjs",
+  "exports": {
+    ".": {
+      "import": "./dist/main.mjs",
+      "require": "./dist/main.cjs"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "types": "./dist/main.d.ts",
+  "bin": {
+    "svgpipe": "./dist/cli.cjs"
+  },
   "scripts": {
-    "dev:test": "vitest"
+    "build": "unbuild",
+    "dev:test": "vitest watch",
+    "dev:cli": "node --watch --loader ts-node/esm ./src/cli.ts run -c ./playground/",
+    "test": "vitest run"
   },
   "keywords": [],
   "author": "https://github.com/niklas-may",
   "license": "MIT",
+  "packageManager": "pnpm@9.5.0",
   "devDependencies": {
-    "@types/node": "^22.2.0",
+    "@types/lodash": "^4.17.7",
+    "@types/node": "^20.14.11",
     "@types/svgo": "^3.0.0",
-    "typescript": "^5.5.4",
-    "vitest": "^2.0.5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3",
+    "unbuild": "^2.0.0",
+    "vitest": "^2.0.3"
   },
   "dependencies": {
+    "c12": "^1.11.1",
     "change-case": "^5.4.4",
+    "citty": "^0.1.6",
+    "consola": "^3.2.3",
     "defu": "^6.1.4",
-    "knitwork": "^1.1.0",
+    "lodash": "^4.17.21",
     "prettier": "^3.3.3",
     "svgo": "^3.3.2"
   }

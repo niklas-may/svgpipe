@@ -1,11 +1,16 @@
 import type { CombinedModuleConfig, IStrategy, ModuleConfig, Config } from "src/types";
 import { readdirSync } from "fs";
+import cloneDeep from "lodash/cloneDeep";
 import { readFile } from "fs/promises";
 import { basename, extname, join, parse, resolve } from "path";
 import { optimize } from "svgo";
 import { File } from "./file";
-import { VueInlineStrategy } from "src/strategies/vue-inline-strategy";
-import { DefaultStrategy } from "src/strategies/default-strategy";
+import { VueInlineStrategy } from "../strategies/vue-inline-strategy";
+import { DefaultStrategy } from "../strategies/default-strategy";
+import defu from "defu";
+import { createConsola } from "consola";
+
+const logger = createConsola({ formatOptions: { date: false } }).withTag("svgpipe");
 
 export async function run(config: Config) {
   return Promise.all(config.modules.map((module) => processModule(module, config)));
@@ -14,27 +19,25 @@ export async function run(config: Config) {
 async function processModule(module: ModuleConfig, config: Config) {
   const svgs: File[] = [];
 
+  const strategy = creatStrategy(module, config);
+  const svgoOptions = defu(module.svgo, strategy.options.module.svgo);
+
   await readInput(module, async ({ content, path }) => {
-    const { data } = optimize(content, { path, ...module.svgo });
+    const { data } = optimize(content, { path, ...svgoOptions });
     const svg = new File({
       name: parse(basename(path)).name,
       content: data,
       extension: "svg",
-      path: module.output,
+      path: join(config.baseDir ?? "", module.output),
     });
 
     svgs.push(svg);
   });
 
-  const strategy = creatStrategy(module);
   strategy.process(svgs);
 
-  return Promise.all(
-    strategy.files.map((file) => {
-      file.path = join(config.baseDir ?? "", file.path);
-      return file.write();
-    })
-  );
+  await Promise.all(strategy.files.map((file) => file.write()));
+  logger.success(`(${strategy.name}) Processed ${svgs.length} files`);
 }
 
 async function readInput(module: ModuleConfig, callback: (args: { content: string; path: string }) => Promise<any>) {
@@ -55,14 +58,19 @@ function getSvgPaths(dir: string) {
   return res;
 }
 
-function getOptions(module: ModuleConfig) {
+function getModuleOptions(module: ModuleConfig, config: Config) {
   const configTypeString = typeof module.strategy === "string";
-  const options = Object.assign({}, module, { strategy: {} }) as CombinedModuleConfig<any>;
+  const options = Object.assign({}, config, { module }) as CombinedModuleConfig<any>;
   if (configTypeString) {
+    const res = cloneDeep(options);
+    delete res.modules;
     return options;
   }
 
-  return Object.assign({}, module, { strategy: module.strategy![1] }) as CombinedModuleConfig<any>;
+  options.module.strategyConfig = module.strategy![1];
+  const res = cloneDeep(options);
+  delete res.strategy;
+  return res;
 }
 
 function getStrategy(module: ModuleConfig) {
@@ -83,8 +91,8 @@ function getStrategy(module: ModuleConfig) {
   return module.strategy![0] as new (opts: any) => IStrategy;
 }
 
-function creatStrategy(module: ModuleConfig) {
-  const options = getOptions(module);
+function creatStrategy(module: ModuleConfig, config: Config) {
+  const options = getModuleOptions(module, config);
   const Strategy = getStrategy(module);
   return new Strategy(options);
 }

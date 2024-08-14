@@ -1,44 +1,64 @@
-import type { CombinedModuleConfig, IStrategy, IFile } from "src/types";
+import type { CombinedModuleConfig, ModuleConfigParse, IStrategy, IFile, StrategyConfigEntry } from "../types";
+
 import { kebabCase, pascalCase } from "change-case";
 import defu from "defu";
-import { File } from "src/core/file";
-import { relative } from "path";
+import { join, relative } from "node:path";
+import { File } from "../core/file";
 
-type Name = "vue-inline";
 type Options = {
   componentName: string;
   componentPath: string;
 };
-export type VueInlineConfig = Name | [Name, Options];
+
+export type VueInlineConfig = StrategyConfigEntry<"vue-inline", { componentName: string; componentPath: string }>;
+
+const defaultOptions: ModuleConfigParse<Options> = {
+  svgo: {
+    multipass: true,
+    plugins: [
+      "removeDimensions",
+      "sortAttrs",
+      "removeTitle",
+      "cleanupIds",
+      {
+        name: "convertColors",
+        params: {
+          currentColor: true,
+        },
+      },
+    ],
+  },
+  strategyConfig: {
+    componentName: "BaseIcon",
+    componentPath: "./components",
+  },
+};
 
 export class VueInlineStrategy implements IStrategy {
+  public name = "Vue Inline Strategy";
+  public options: CombinedModuleConfig<Options>;
   public files: IFile[] = [];
 
-  private options: CombinedModuleConfig<Options>;
   private imports: string[] = [];
   private types: string[] = [];
   private components: string[] = [];
 
   constructor(options: CombinedModuleConfig<Options>) {
-    const defaultOptions: Options = {
-      componentName: "BaseIcon",
-      componentPath: "./components/base",
-    };
-    this.options = defu(options, { strategy: defaultOptions });
+    this.options = defu(options, { module: defaultOptions });
   }
 
-  public process(files: IFile[]): void {
-    files.forEach((file) => {
-      this.addImport(file);
-      this.addType(file);
-      this.addComponent(file);
-      this.files.push(file);
+  public process(svgs: IFile[]): void {
+    svgs.forEach((svg) => {
+      this.addImport(svg);
+      this.addType(svg);
+      this.addComponent(svg);
+      this.files.push(svg);
     });
     const vueFile = new File({
-      name: this.options.strategy.componentName,
+      name: this.options.module.strategyConfig.componentName,
       content: this.getVueComponent(),
       extension: "vue",
-      path: this.options.strategy.componentPath,
+      path: join(this.options.baseDir ?? "", this.options.module.strategyConfig.componentPath),
     });
     this.files.push(vueFile);
   }
@@ -54,10 +74,7 @@ export class VueInlineStrategy implements IStrategy {
     defineProps<{
       name: ${this.getTypeString()}
     }>()
-    </script>
-
-
-    `;
+    </script>`;
   }
 
   private addComponent(file: IFile) {
@@ -70,12 +87,12 @@ export class VueInlineStrategy implements IStrategy {
 
   private addImport(file: IFile) {
     this.imports.push(
-      `import ${this.getComponentNameString(file)} from "${relative(this.options.strategy.componentPath, file.fullFilePath)}?component"`
+      `import ${this.getComponentNameString(file)} from "${relative(this.options.module.strategyConfig.componentPath, file.fullFilePath)}?component"`
     );
   }
 
   private getComponentNameString(file: IFile) {
-    return pascalCase(`Svg${pascalCase(file.name)}`)
+    return pascalCase(`Svg${pascalCase(file.name)}`);
   }
 
   private getComponentString() {

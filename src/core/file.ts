@@ -1,4 +1,4 @@
-import type { IFile, IFileArgs } from "src/types";
+import type { IFile, IFileArgs } from "../types";
 
 import path from "node:path";
 import { existsSync, promises, mkdirSync } from "node:fs";

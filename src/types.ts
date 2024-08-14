@@ -4,6 +4,8 @@ import { VueInlineConfig } from "./strategies/vue-inline-strategy";
 export interface IStrategy {
   files: IFile[];
   process: (files: IFile[]) => void;
+  name: string
+  options: CombinedModuleConfig<any>;
 }
 
 export interface IFileArgs {
@@ -19,7 +21,9 @@ export interface IFile extends IFileArgs {
   write: () => Promise<void>;
 }
 
-export type StrategyConfig = VueInlineConfig | "default" | [new (...args: any) => IStrategy, CombinedModuleConfig<any>];
+export type StrategyConfigEntry<TName extends string, TOptions extends Record<string, any>> = TName | [TName, TOptions];
+
+export type StrategyConfig = VueInlineConfig | "default" | [new (...args: any) => IStrategy, Record<string, any>?];
 
 export type ModuleConfig = {
   input: string;
@@ -28,11 +32,17 @@ export type ModuleConfig = {
   output: string;
 };
 
-export type CombinedModuleConfig<T extends Record<string, any>> = Omit<ModuleConfig, "strategy" | "svgo"> & {
-  strategy: T;
-};
-
 export type Config = {
   baseDir?: string;
   modules: ModuleConfig[];
+};
+
+type Optional<T> = {
+  [P in keyof T]?: T[P];
+};
+
+export type ModuleConfigParse<T extends Record<string, any>> = Omit<Optional<ModuleConfig>, "strategy"> & { strategyConfig: T };
+
+export type CombinedModuleConfig<T extends Record<string, any> = {}> = Omit<Config, "modules"> & {
+  module: ModuleConfigParse<T>;
 };

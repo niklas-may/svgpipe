@@ -1,8 +1,10 @@
-import type { CombinedModuleConfig, IStrategy, IFile } from "src/types";
+import type { CombinedModuleConfig, IStrategy, IFile } from "../types";
 
 export class DefaultStrategy implements IStrategy {
+  name = "Default Strategy";
+
   files: IFile[] = [];
-  constructor(options: CombinedModuleConfig<any>) {}
+  constructor(public options: CombinedModuleConfig<any>) {}
 
   public process(files: IFile[]): void {
     this.files = files;
