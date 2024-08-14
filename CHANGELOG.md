@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.7
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.6...v0.0.7)
+
+### ✅ Tests
+
+- Updated tests ([5b58474](https://github.com/niklas-may/svgpipe/commit/5b58474))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.6
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.5...v0.0.6)
