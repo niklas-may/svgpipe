@@ -3,7 +3,7 @@ import type { IFile, IFileArgs } from "../types";
 import path from "node:path";
 import { existsSync, promises, mkdirSync } from "node:fs";
 import * as prettier from "prettier";
-import { kebabCase } from "change-case";
+import { kebabCase } from "change-case-all";
 
 export class File implements IFile {
   extension: string;

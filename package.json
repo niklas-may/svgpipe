@@ -40,7 +40,7 @@
   },
   "dependencies": {
     "c12": "^1.11.1",
-    "change-case": "^5.4.4",
+    "change-case-all": "^2.1.0",
     "citty": "^0.1.6",
     "consola": "^3.2.3",
     "defu": "^6.1.4",

@@ -1,6 +1,6 @@
 import type { CombinedModuleConfig, ModuleConfigParse, IStrategy, IFile, StrategyConfigEntry } from "../types";
 
-import { kebabCase, pascalCase } from "change-case";
+import { kebabCase, pascalCase } from "change-case-all";
 import defu from "defu";
 import { join, relative } from "node:path";
 import { File } from "../core/file";
