@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.5
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.4...v0.0.5)
+
+### 🏡 Chore
+
+- Update deps ([3032e15](https://github.com/niklas-may/svgpipe/commit/3032e15))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.4
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.3...v0.0.4)
