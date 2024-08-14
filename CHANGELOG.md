@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.8
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.7...v0.0.8)
+
+### 🩹 Fixes
+
+- Pass $attrs to components in vue-inline-strategy ([916bd1d](https://github.com/niklas-may/svgpipe/commit/916bd1d))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.7
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.6...v0.0.7)
