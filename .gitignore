@@ -5,3 +5,4 @@ dist
 .eslintcache
 coverage
 TODO.md
+.svgpipe

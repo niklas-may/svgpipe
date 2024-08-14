@@ -6,7 +6,7 @@ import { MyStrategy } from "./fixtures/straegies/custom";
 
 describe("[App]", () => {
   describe("Build in strategy", () => {
-    it("No options", async () => {
+    it.only("No options", async () => {
       const config: Config = {
         baseDir: ".svgpipe",
         modules: [

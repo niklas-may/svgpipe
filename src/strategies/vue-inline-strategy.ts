@@ -86,8 +86,10 @@ export class VueInlineStrategy implements IStrategy {
   }
 
   private addImport(file: IFile) {
+    const componentPath = join(this.options.baseDir ?? "", this.options.module.strategyConfig.componentPath)
+    const filePath =  file.fullFilePath
     this.imports.push(
-      `import ${this.getComponentNameString(file)} from "${relative(this.options.module.strategyConfig.componentPath, file.fullFilePath)}?component"`
+      `import ${this.getComponentNameString(file)} from "${relative(componentPath, filePath)}?component"`
     );
   }
 
