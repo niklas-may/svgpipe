@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.3
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.2...v0.0.3)
+
+### 🩹 Fixes
+
+- Added defineConfig to exports ([3da1988](https://github.com/niklas-may/svgpipe/commit/3da1988))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.2
 
 
