@@ -6,17 +6,19 @@ import { MyStrategy } from "./fixtures/straegies/custom";
 
 describe("[App]", () => {
   describe("Build in strategy", () => {
-    it.only("No options", async () => {
+    it("No options", async () => {
+
       const config: Config = {
         baseDir: ".svgpipe",
         modules: [
           {
-            input: "./test/fixtures/svgs",
+            input: ".svgpipe/input",
             output: "./svg/logos",
             strategy: "vue-inline",
           },
         ],
       };
+    
       await run(config);
     });
 
