@@ -22,7 +22,7 @@
     "dev:test": "vitest watch",
     "dev:cli": "node --watch --loader ts-node/esm ./src/cli.ts run -c ./playground/",
     "test": "vitest run",
-    "release": "pnpm test && changelogen --release && npm publish && git push --follow-tags"
+    "release": "pnpm test && pnpm build && changelogen --release && npm publish && git push --follow-tags"
   },
   "keywords": [],
   "author": "https://github.com/niklas-may",
