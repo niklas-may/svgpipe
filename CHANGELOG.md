@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.6
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.5...v0.0.6)
+
+### 🩹 Fixes
+
+- Correct impurt in vue inline stratgy ([2a2eaa0](https://github.com/niklas-may/svgpipe/commit/2a2eaa0))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.5
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.4...v0.0.5)
