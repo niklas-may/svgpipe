@@ -26,15 +26,20 @@ export class File implements IFile {
     return path.join(this.fullPath, `${kebabCase(this.name)}.${this.extension}`);
   }
 
-  async write() {
-    if (!existsSync(this.fullPath)) {
-      mkdirSync(this.fullPath, { recursive: true });
-    }
+  async prettify() {
     try {
       if (this.extension !== "svg") {
         this.content = await prettier.format(this.content, { filepath: this.fullFilePath });
       }
     } catch (error) {}
+  }
+
+  async write() {
+    if (!existsSync(this.fullPath)) {
+      mkdirSync(this.fullPath, { recursive: true });
+    }
+
+    await this.prettify();
 
     return promises.writeFile(this.fullFilePath, this.content);
   }

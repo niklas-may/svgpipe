@@ -1,5 +1,6 @@
 import { IFile, IStrategy, CombinedModuleConfig } from "src/types";
 import { File } from "src/main";
+import { join } from "path";
 
 export interface MyOptions {
   foo: string;
@@ -20,7 +21,7 @@ export class MyStrategy implements IStrategy {
       content: "My component content",
       extension: "tsx",
       name: "MyComponent",
-      path: this.options.module.output!,
+      path: join(this.options.baseDir ?? "",  this.options.module.output!)
     });
 
     this.files.push(myFile);

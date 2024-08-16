@@ -12,11 +12,11 @@ import { createConsola } from "consola";
 
 const logger = createConsola({ formatOptions: { date: false } }).withTag("svgpipe");
 
-export async function run(config: Config) {
+export async function run(config: Config): Promise<IStrategy[]> {
   return Promise.all(config.modules.map((module) => processModule(module, config)));
 }
 
-async function processModule(module: ModuleConfig, config: Config) {
+async function processModule(module: ModuleConfig, config: Config): Promise<IStrategy> {
   const svgs: File[] = [];
 
   const strategy = creatStrategy(module, config);
@@ -38,6 +38,7 @@ async function processModule(module: ModuleConfig, config: Config) {
 
   await Promise.all(strategy.files.map((file) => file.write()));
   logger.success(`(${strategy.name}) Processed ${svgs.length} files`);
+  return strategy;
 }
 
 async function readInput(module: ModuleConfig, callback: (args: { content: string; path: string }) => Promise<any>) {
