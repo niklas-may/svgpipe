@@ -25,6 +25,9 @@ export class File implements IFile {
   get fullFilePath() {
     return path.join(this.fullPath, `${kebabCase(this.name)}.${this.extension}`);
   }
+  get basename() {
+    return path.basename(this.fullFilePath);
+  }
 
   async prettify() {
     try {

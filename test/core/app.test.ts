@@ -1,15 +1,15 @@
 import type { Config } from "src/types";
 
-import { afterAll, describe, it, vi } from "vitest";
-import { run } from "../src/core/app";
-import { MyStrategy } from "./fixtures/straegies/custom";
+import { afterAll, describe, it } from "vitest";
+import { run } from "../../src/core/app";
+import { MyStrategy } from "../fixtures/straegies/custom";
 import { rmSync } from "fs";
 
 describe("[App]", () => {
   const baseDir = "./test/.svgpipe";
 
   afterAll(() => {
-    rmSync(baseDir, { recursive: true, force: true });
+    rmSync(baseDir, { force: true, recursive: true });
   });
 
   describe("Build in strategy", () => {
@@ -55,7 +55,7 @@ describe("[App]", () => {
   describe("Custom strategy", () => {
     it("No Options", async () => {
       const config: Config = {
-        baseDir,
+        baseDir: ".svgpipe/custom",
         modules: [
           {
             input: "./test/fixtures/svgs",
@@ -78,7 +78,6 @@ describe("[App]", () => {
               MyStrategy,
               {
                 componentName: "BaseIcon",
-                componentPath: "./components",
               },
             ],
           },

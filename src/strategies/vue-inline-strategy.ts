@@ -4,11 +4,13 @@ import { kebabCase, pascalCase } from "change-case-all";
 import defu from "defu";
 import { join, relative } from "node:path";
 import { File } from "../core/file";
+import { camelCase, snakeCase } from "lodash";
 
 type Options = {
   componentName?: string;
   componentPath?: string;
   typePath?: string;
+  tokenPath?: string;
 };
 
 export type VueInlineConfig = StrategyConfigEntry<"vue-inline", Options>;
@@ -33,6 +35,7 @@ const defaultOptions: ModuleConfigParse<Options> = {
     componentName: "BaseIcon",
     componentPath: "./components",
     typePath: "./types",
+    tokenPath: "",
   },
 };
 
@@ -68,7 +71,7 @@ export class VueInlineStrategy implements IStrategy {
     });
 
     const typeFile = new File({
-      name: this.options.module.strategyConfig.componentName,
+      name: this.typeName,
       content: "",
       extension: "ts",
       path: join(this.options.baseDir ?? "", this.options.module.strategyConfig.typePath),
@@ -86,10 +89,21 @@ export class VueInlineStrategy implements IStrategy {
     });
 
     vueFile.content = this.getVueComponent();
+
     if (this.options.module.strategyConfig.typePath) {
       typeFile.content = this.getTypeFileContent();
 
       this.files.push(typeFile);
+    }
+
+    if (this.options.module.strategyConfig.tokenPath) {
+      const tokenFile = new File({
+        name: camelCase(`${this.componentName}Tokens`),
+        path: join(this.options.baseDir ?? "", this.options.module.strategyConfig.tokenPath),
+        extension: "ts",
+        content: this.getTokenString(),
+      });
+      this.files.push(tokenFile);
     }
     this.files.push(vueFile);
   }
@@ -137,7 +151,6 @@ export class VueInlineStrategy implements IStrategy {
     return pascalCase(`Svg${pascalCase(file.name)}`);
   }
 
-
   private getComponentString() {
     return this.components.join(" \n ");
   }
@@ -159,5 +172,9 @@ export class VueInlineStrategy implements IStrategy {
 
   private getImportString() {
     return this.imports.join("\n");
+  }
+
+  private getTokenString() {
+    return `export const ${pascalCase(`${this.componentName}Tokens`)} = [ ${this.types.join(", ")}]`;
   }
 }

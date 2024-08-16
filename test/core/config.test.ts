@@ -1,7 +1,7 @@
 import type { Config } from "src/types";
 
 import { describe, it, expectTypeOf } from "vitest";
-import { defineConfig } from "src/core/config";
+import { defineConfig } from "../../src/core/config";
 
 describe("[Config]", () => {
   describe("defineConfig", () => {
