@@ -10,15 +10,12 @@ export class MyStrategy implements IStrategy {
   files: IFile[] = [];
 
   constructor(options: CombinedModuleConfig<MyOptions>) {
-    // Optional: apply default to options
     this.options = options;
   }
 
   process(files: IFile[]) {
-    // Optional: Do something with the files
     this.files = files;
 
-    // Optional: Add a new file
     const myFile = new File({
       content: "My component content",
       extension: "tsx",
