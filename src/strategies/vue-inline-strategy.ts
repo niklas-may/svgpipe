@@ -4,7 +4,7 @@ import { kebabCase, pascalCase } from "change-case-all";
 import defu from "defu";
 import { join, relative } from "node:path";
 import { File } from "../core/file";
-import { camelCase, snakeCase } from "lodash";
+import { camelCase } from "lodash";
 
 type Options = {
   componentName?: string;

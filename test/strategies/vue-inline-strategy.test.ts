@@ -3,7 +3,6 @@ import type { Config } from "src/types";
 import { afterAll, describe, expect, it, vi } from "vitest";
 import { run } from "../../src/core/app";
 import { rmSync } from "fs";
-import { basename } from "path";
 
 describe("[vue-inline]", () => {
   const baseDir = "./test/.svgpipe";
@@ -19,7 +18,14 @@ describe("[vue-inline]", () => {
         {
           input: "test/fixtures/svgs",
           output: "./svgs",
-          strategy: ["vue-inline", {tokenPath: "./tokens"}],
+          strategy: [
+            "vue-inline",
+            {
+              componentPath: "/",
+              typePath: "/",
+              tokenPath: "/",
+            },
+          ],
         },
       ],
     };
@@ -37,7 +43,7 @@ describe("[vue-inline]", () => {
     });
 
     it("Tokens should match snapshot", () => {
-      const  file = vueInlineStrategy.files.find((file) => file.name === "baseIconTokens");
+      const file = vueInlineStrategy.files.find((file) => file.name === "baseIconTokens");
       expect(file?.content).toMatchFileSnapshot("./snapshots/tokens.ts");
     });
   });
@@ -49,7 +55,13 @@ describe("[vue-inline]", () => {
         {
           input: "test/fixtures/svgs",
           output: "./svgs",
-          strategy: ["vue-inline", { typePath: "" }],
+          strategy: [
+            "vue-inline",
+            {
+              componentPath: "/",
+              typePath: "",
+            },
+          ],
         },
       ],
     };
