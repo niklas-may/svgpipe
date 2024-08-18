@@ -1,17 +1,12 @@
 import type { Config } from "./../types";
 
-import { afterAll, describe, it } from "vitest";
+import { describe, it } from "vitest";
 import { run } from "./app";
 import { MyStrategy } from "../../test/fixtures/straegies/custom";
-import { rmSync } from "fs";
 import { join } from "path";
 
 describe("[App]", () => {
-  const baseDir = join("./test/.svgpipe", "app");
-
-  afterAll(() => {
-    rmSync(baseDir, { force: true, recursive: true });
-  });
+  const baseDir = join("./.svgpipe", "app");
 
   describe("Build in strategy", () => {
     it("No options", async () => {

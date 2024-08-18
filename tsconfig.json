@@ -14,5 +14,6 @@
   "ts-node": {
     "experimentalSpecifierResolution": "node",
     "transpileOnly": true
-  }
+  },
+  "exclude": ["node_modules", "**/__snapshots__"]
 }
