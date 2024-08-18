@@ -1,12 +1,13 @@
-import type { Config } from "src/types";
+import type { Config } from "./../types";
 
 import { afterAll, describe, it } from "vitest";
-import { run } from "../../src/core/app";
-import { MyStrategy } from "../fixtures/straegies/custom";
+import { run } from "./app";
+import { MyStrategy } from "../../test/fixtures/straegies/custom";
 import { rmSync } from "fs";
+import { join } from "path";
 
 describe("[App]", () => {
-  const baseDir = "./test/.svgpipe";
+  const baseDir = join("./test/.svgpipe", "app");
 
   afterAll(() => {
     rmSync(baseDir, { force: true, recursive: true });
@@ -41,7 +42,6 @@ describe("[App]", () => {
             strategy: [
               "vue-inline",
               {
-                componentName: "BaseIcon",
                 componentPath: "./components",
               },
             ],
@@ -55,7 +55,7 @@ describe("[App]", () => {
   describe("Custom strategy", () => {
     it("No Options", async () => {
       const config: Config = {
-        baseDir: ".svgpipe/custom",
+        baseDir: join(baseDir, "custom"),
         modules: [
           {
             input: "./test/fixtures/svgs",
@@ -77,7 +77,7 @@ describe("[App]", () => {
             strategy: [
               MyStrategy,
               {
-                componentName: "BaseIcon",
+                componentName: "MyComponent",
               },
             ],
           },

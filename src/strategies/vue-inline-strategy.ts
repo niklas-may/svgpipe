@@ -138,13 +138,13 @@ export class VueInlineStrategy implements IStrategy {
     const filePath = file.fullFilePath;
 
     this.imports.push(
-      `import ${this.getSvgComponentNameString(file)} from "${relative(this.componentPath, filePath)}?component"`
+      `import ${this.getSvgComponentNameString(file)} from "./${relative(this.componentPath, filePath)}?component"`
     );
   }
 
   private addTypeImport(file: IFile) {
     const filePath = file.fullFilePath;
-    this.imports.push(`import { type ${this.typeName}} from "${relative(this.componentPath, filePath)}"\n`);
+    this.imports.push(`import { type ${this.typeName}} from "./${relative(this.componentPath, filePath)}"\n`);
   }
 
   private getSvgComponentNameString(file: IFile) {
