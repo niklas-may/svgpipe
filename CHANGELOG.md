@@ -1,6 +1,29 @@
 # Changelog
 
 
+## v0.0.9
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.8...v0.0.9)
+
+### 🚀 Enhancements
+
+- Option to have prop type definition in external file ([d1c6971](https://github.com/niklas-may/svgpipe/commit/d1c6971))
+- Optionally create a file for tokens and file for prop types ([70e8caa](https://github.com/niklas-may/svgpipe/commit/70e8caa))
+
+### ✅ Tests
+
+- Cleanup ([77134e7](https://github.com/niklas-may/svgpipe/commit/77134e7))
+
+### 🎨 Styles
+
+- Cleanup ([5a15dfd](https://github.com/niklas-may/svgpipe/commit/5a15dfd))
+- Cleanup ([0caee90](https://github.com/niklas-may/svgpipe/commit/0caee90))
+- Restructured tests ([f86912d](https://github.com/niklas-may/svgpipe/commit/f86912d))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.8
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.7...v0.0.8)
