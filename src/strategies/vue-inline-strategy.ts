@@ -4,8 +4,8 @@ import { kebabCase, pascalCase } from "change-case-all";
 import defu from "defu";
 import { join, relative } from "node:path";
 import { File } from "../core/file";
-import { TypeFile } from "src/files/type-file";
-import { TokenFile } from "src/files/token-file";
+import { TypeFile } from "../files/type-file";
+import { TokenFile } from "../files/token-file";
 
 type Options = {
   componentName?: string;
