@@ -21,7 +21,7 @@ export class MyStrategy implements IStrategy {
       content: "My component content",
       extension: "tsx",
       name: "MyComponent",
-      path: join(this.options.baseDir ?? "",  this.options.module.output!)
+      path: join(this.options.baseOutputDir ?? "",  this.options.module.output!)
     });
 
     this.files.push(myFile);
