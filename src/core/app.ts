@@ -39,7 +39,7 @@ async function processModule(module: ModuleConfig, config: Config): Promise<IStr
 
   await Promise.all(strategy.files.map((file) => file.write()));
   logger.success(
-    `${kebabCase(strategy.constructor.name)} ("${relative(process.cwd(), join(config.baseDir ?? "", module.input))}): Processed ${svgs.length} files.`
+    `${kebabCase(strategy.constructor.name)} ("${relative(process.cwd(), module.input)}): Processed ${svgs.length} files.`
   );
   return strategy;
 }

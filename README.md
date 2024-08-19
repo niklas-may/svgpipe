@@ -68,7 +68,7 @@ export default defineConfig({
 
 Creates a vue component that imports all SVGs. This components depends on `vite-svg-loader`.
 
-[Example output](src/strategies/__snapshots__/vue-inline-strategy)
+[Example output](https://github.com/niklas-may/svgpipe/tree/main/src/strategies/__snapshots__/vue-inline-strategy)
 
 **Options**
 
