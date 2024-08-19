@@ -58,17 +58,17 @@ export class VueInlineStrategy implements IStrategy {
       name: this.options.module.strategyConfig.componentName,
       content: "",
       extension: "vue",
-      path: join(this.options.baseDir ?? "", this.options.module.strategyConfig.componentPath),
+      path: join(this.options.baseOutputDir ?? "", this.options.module.strategyConfig.componentPath),
     });
 
     this.typeFile = new TypeFile({
       name: this.vueFile.name,
-      path: join(this.options.baseDir ?? "", this.options.module.strategyConfig.typePath),
+      path: join(this.options.baseOutputDir ?? "", this.options.module.strategyConfig.typePath),
     });
 
     this.tokenFile = new TokenFile({
       name: this.vueFile.name,
-      path: join(this.options.baseDir ?? "", this.options.module.strategyConfig.tokenPath ?? ""),
+      path: join(this.options.baseOutputDir ?? "", this.options.module.strategyConfig.tokenPath ?? ""),
     });
   }
 

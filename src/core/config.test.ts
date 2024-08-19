@@ -7,7 +7,7 @@ describe("[Config]", () => {
   describe("defineConfig", () => {
     it("String config should not have TS error", async () => {
       const config = defineConfig({
-        baseDir: ".svgpipe",
+        baseOutputDir: ".svgpipe",
         modules: [
           {
             input: "./test/fixtures/svgs",
@@ -22,7 +22,7 @@ describe("[Config]", () => {
 
     it("Array config should not have TS error", async () => {
       const config = defineConfig({
-        baseDir: ".svgpipe",
+        baseOutputDir: ".svgpipe",
         modules: [
           {
             input: "./test/fixtures/svgs",

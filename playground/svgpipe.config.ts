@@ -1,7 +1,7 @@
 import { defineConfig } from "../src/core/config";
 
 export default defineConfig({
-  baseDir: "playground/.svgpipe",
+  baseOutputDir: "playground/.svgpipe",
   modules: [
     {
       input: "./test/fixtures/svgs",

@@ -29,7 +29,7 @@ npx svgpipe --help
 import { defineConfig } from "svgpipe";
 
 export default defineConfig({
-  baseDir: ".svgpipe", // that's the default
+  baseOutputDir: ".svgpipe", // that's the default
   modules: [
     {
       input: "./assets/svgs/logos",

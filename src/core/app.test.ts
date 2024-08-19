@@ -6,12 +6,12 @@ import { MyStrategy } from "../../test/fixtures/strategies/custom";
 import { join } from "path";
 
 describe("[App]", () => {
-  const baseDir = join("./.svgpipe", "app");
+  const baseOutputDir = join("./.svgpipe", "app");
 
   describe("Build in strategy", () => {
     it("No options", async () => {
       const config: Config = {
-        baseDir,
+        baseOutputDir,
         modules: [
           {
             input: "test/fixtures/svgs",
@@ -26,7 +26,7 @@ describe("[App]", () => {
 
     it("Options", async () => {
       const config: Config = {
-        baseDir,
+        baseOutputDir,
         modules: [
           {
             input: "./test/fixtures/svgs",
@@ -50,7 +50,7 @@ describe("[App]", () => {
   describe("Custom strategy", () => {
     it("No Options", async () => {
       const config: Config = {
-        baseDir: join(baseDir, "custom"),
+        baseOutputDir: join(baseOutputDir, "custom"),
         modules: [
           {
             input: "./test/fixtures/svgs",
@@ -64,7 +64,7 @@ describe("[App]", () => {
 
     it("Options", async () => {
       const config: Config = {
-        baseDir,
+        baseOutputDir,
         modules: [
           {
             input: "./test/fixtures/svgs",

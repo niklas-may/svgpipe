@@ -29,7 +29,7 @@ async function processModule(module: ModuleConfig, config: Config): Promise<IStr
       name: parse(basename(path)).name,
       content: data,
       extension: "svg",
-      path: join(config.baseDir ?? "", module.output),
+      path: join(config.baseOutputDir ?? "", module.output),
     });
 
     svgs.push(svg);
