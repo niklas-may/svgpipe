@@ -2,13 +2,14 @@ import type { CombinedModuleConfig, IStrategy, ModuleConfig, Config } from "src/
 import { readdirSync } from "fs";
 import cloneDeep from "lodash/cloneDeep";
 import { readFile } from "fs/promises";
-import { basename, extname, join, parse, resolve } from "path";
+import { basename, extname, join, parse, relative, resolve } from "path";
 import { optimize } from "svgo";
 import { File } from "./file";
 import { VueInlineStrategy } from "../strategies/vue-inline-strategy";
 import { DefaultStrategy } from "../strategies/default-strategy";
 import defu from "defu";
 import { createConsola } from "consola";
+import { kebabCase } from "change-case-all";
 
 const logger = createConsola({ formatOptions: { date: false } }).withTag("svgpipe");
 
@@ -37,7 +38,9 @@ async function processModule(module: ModuleConfig, config: Config): Promise<IStr
   strategy.process(svgs);
 
   await Promise.all(strategy.files.map((file) => file.write()));
-  logger.success(`(${strategy.constructor.name}) Processed ${svgs.length} files`);
+  logger.success(
+    `${kebabCase(strategy.constructor.name)} ("${relative(process.cwd(), join(config.baseDir ?? "", module.input))}): Processed ${svgs.length} files.`
+  );
   return strategy;
 }
 
