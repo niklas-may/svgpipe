@@ -1,6 +1,31 @@
 # Changelog
 
 
+## v0.0.10
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.9...v0.0.10)
+
+### 🩹 Fixes
+
+- Updated file import ([279ca14](https://github.com/niklas-may/svgpipe/commit/279ca14))
+- Improved cli output ([33f49dd](https://github.com/niklas-may/svgpipe/commit/33f49dd))
+
+### 💅 Refactors
+
+- Common file types are extracted for fother usage in other strategies. ([5f65293](https://github.com/niklas-may/svgpipe/commit/5f65293))
+
+### 📖 Documentation
+
+- Updated docs ([d215a13](https://github.com/niklas-may/svgpipe/commit/d215a13))
+
+### 🎨 Styles
+
+- Test cleanup ([f388731](https://github.com/niklas-may/svgpipe/commit/f388731))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.9
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.8...v0.0.9)
