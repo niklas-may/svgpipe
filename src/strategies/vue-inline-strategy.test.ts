@@ -4,8 +4,9 @@ import { describe, expect, it } from "vitest";
 import { run } from "../../src/core/app";
 import { join } from "path";
 
-describe("[vue-inline]", () => {
-  const baseDir = join("./.svgpipe", "vue-inline");
+describe("[vue-inline-strategy]", () => {
+  const baseDir = "./.svgpipe/vue-inline-strategy";
+  const snapshotDir = "./__snapshots__/vue-inline-strategy";
 
   it("Should match snapshot when creating token and type file", async () => {
     const config: Config = {
@@ -18,8 +19,8 @@ describe("[vue-inline]", () => {
             "vue-inline",
             {
               componentPath: "/components",
-              typePath: "/tokens",
-              tokenPath: "/types",
+              typePath: "/types",
+              tokenPath: "/tokens",
             },
           ],
         },
@@ -29,13 +30,13 @@ describe("[vue-inline]", () => {
     const [vueInlineStrategy] = await run(config);
 
     const componentFile = vueInlineStrategy.files.find((file) => file.extension === "vue");
-    expect(componentFile?.content).toMatchFileSnapshot("./__snapshots__/component-external-types.vue");
+    expect(componentFile?.content).toMatchFileSnapshot(join(snapshotDir, "component-external-types.vue"));
 
     const typeFile = vueInlineStrategy.files.find((file) => file.name === "BaseIconProps");
-    expect(typeFile?.content).toMatchFileSnapshot("./__snapshots__/types.ts");
+    expect(typeFile?.content).toMatchFileSnapshot(join(snapshotDir, "types.ts"));
 
     const file = vueInlineStrategy.files.find((file) => file.name === "baseIconTokens");
-    expect(file?.content).toMatchFileSnapshot("./__snapshots__/tokens.ts");
+    expect(file?.content).toMatchFileSnapshot(join(snapshotDir, "tokens.ts"));
   });
 
   it("Should match snapshot when no additional files", async () => {
@@ -48,8 +49,8 @@ describe("[vue-inline]", () => {
           strategy: [
             "vue-inline",
             {
-              componentPath: "/",
               typePath: "",
+              componentName: "BaseIconMin"
             },
           ],
         },
@@ -58,6 +59,6 @@ describe("[vue-inline]", () => {
     const [vueInlineStrategy] = await run(config);
 
     const componentFile = vueInlineStrategy.files.find((file) => file.extension === "vue");
-    expect(componentFile?.content).toMatchFileSnapshot("./__snapshots__/component-inline-types.vue");
+    expect(componentFile?.content).toMatchFileSnapshot(join(snapshotDir, "component-inline-types.vue"));
   });
 });

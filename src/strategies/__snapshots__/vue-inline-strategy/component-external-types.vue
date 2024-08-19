@@ -4,7 +4,7 @@
   <SvgZoomOut v-if="name === 'zoom-out'" v-bind="$attrs" />
 </template>
 <script setup lang="ts">
-import { type BaseIconProps } from "./../tokens/base-icon-props.ts";
+import { type BaseIconProps } from "./../types/base-icon-props.ts";
 
 import SvgXOctagon from "./../svgs/x-octagon.svg?component";
 import SvgYoutube from "./../svgs/youtube.svg?component";

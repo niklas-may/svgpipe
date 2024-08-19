@@ -2,10 +2,9 @@ import { Config as SvgoConfig } from "svgo";
 import { VueInlineConfig } from "./strategies/vue-inline-strategy";
 
 export interface IStrategy {
+  options: CombinedModuleConfig<any>;
   files: IFile[];
   process: (files: IFile[]) => void;
-  name: string
-  options: CombinedModuleConfig<any>;
 }
 
 export interface IFileArgs {

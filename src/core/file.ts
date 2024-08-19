@@ -9,7 +9,7 @@ export class File implements IFile {
   extension: string;
   name: string;
   path: string;
-  content: string;
+  content: string = "";
 
   constructor(args: IFileArgs) {
     this.extension = args.extension;

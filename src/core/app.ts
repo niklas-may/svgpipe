@@ -37,7 +37,7 @@ async function processModule(module: ModuleConfig, config: Config): Promise<IStr
   strategy.process(svgs);
 
   await Promise.all(strategy.files.map((file) => file.write()));
-  logger.success(`(${strategy.name}) Processed ${svgs.length} files`);
+  logger.success(`(${strategy.constructor.name}) Processed ${svgs.length} files`);
   return strategy;
 }
 
