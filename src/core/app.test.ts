@@ -2,7 +2,7 @@ import type { Config } from "./../types";
 
 import { describe, it } from "vitest";
 import { run } from "./app";
-import { MyStrategy } from "../../test/fixtures/straegies/custom";
+import { MyStrategy } from "../../test/fixtures/strategies/custom";
 import { join } from "path";
 
 describe("[App]", () => {
