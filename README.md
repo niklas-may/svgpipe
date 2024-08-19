@@ -62,7 +62,7 @@ export default defineConfig({
 
 ## Strategies
 
-### Build in
+### Built in
 
 #### `vue-inline`
 
@@ -115,7 +115,7 @@ export class MyStrategy implements IStrategy {
       content: "My component content",
       extension: "tsx",
       name: "MyComponent",
-      path: this.options.module.output!,
+      path: this.options.module.output,
     });
 
     this.files.push(myFile);
