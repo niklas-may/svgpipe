@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.11
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.10...v0.0.11)
+
+### 🩹 Fixes
+
+- Cli outputs correct svg input path ([72a3b71](https://github.com/niklas-may/svgpipe/commit/72a3b71))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.10
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.9...v0.0.10)
