@@ -66,37 +66,21 @@ export default defineConfig({
 
 #### `vue-inline`
 
-Creates a vue component that imports all SVGs
+Creates a vue component that imports all SVGs. This components depends on `vite-svg-loader`.
 
-**Example**
-
-```Vue
-<template>
-  <SvgZoomIn v-if="name === 'zoom-in'" />
-  <SvgZoomOut v-if="name === 'zoom-out'" />
-</template>
-<script setup lang="ts">
-import SvgZoomIn from "../svg/logos/zoom-in.svg?component";
-import SvgZoomOut from "../svg/logos/zoom-out.svg?component";
-
-defineProps<{
-  name:
-    | "zoom-in"
-    | "zoom-out";
-}>();
-</script>
-```
-
-This components depends on `vite-svg-loader`
+[Example output](src/strategies/__snapshots__/vue-inline-strategy)
 
 **Options**
 
-| prop          | default      |
-| :------------ | :----------- |
-| componentName | "BaseIcon"   |
-| componentPath | "components" |
+| Property      | Default       | Note                                                                               |
+| :------------ | :------------ | :--------------------------------------------------------------------------------- |
+| componentName | "BaseIcon"    |                                                                                    |
+| componentPath | "/components" |                                                                                    |
+| typePath      | "/types"      | Pass an empty string to define the type in the component file.                     |
+| tokenPath     | ""            | Generates a array with all the token names. Pass an empty sring to skip this file. |
 
 #### `default`
+
 Just outputs the processed SVGs.
 
 ### Create custom
@@ -114,7 +98,6 @@ export interface MyOptions {
 }
 
 export class MyStrategy implements IStrategy {
-  name = "my-strategy";
   options: CombinedModuleConfig<MyOptions>;
   files: IFile[] = [];
 
