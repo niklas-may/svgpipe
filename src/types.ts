@@ -33,6 +33,7 @@ export type ModuleConfig = {
 
 export type Config = {
   baseOutputDir?: string;
+  baseInputDir?: string;
   modules: ModuleConfig[];
 };
 

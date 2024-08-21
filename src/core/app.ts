@@ -23,7 +23,7 @@ async function processModule(module: ModuleConfig, config: Config): Promise<IStr
   const strategy = creatStrategy(module, config);
   const svgoOptions = defu(module.svgo, strategy.options.module.svgo);
 
-  await readInput(module, async ({ content, path }) => {
+  await readInput(module, config, async ({ content, path }) => {
     const { data } = optimize(content, { path, ...svgoOptions });
     const svg = new File({
       name: parse(basename(path)).name,
@@ -39,13 +39,17 @@ async function processModule(module: ModuleConfig, config: Config): Promise<IStr
 
   await Promise.all(strategy.files.map((file) => file.write()));
   logger.success(
-    `${kebabCase(strategy.constructor.name)} ("${relative(process.cwd(), module.input)}): Processed ${svgs.length} files.`
+    `${kebabCase(strategy.constructor.name)} ("${relative(process.cwd(), join(config.baseInputDir ?? "", module.input))}): Processed ${svgs.length} files.`
   );
   return strategy;
 }
 
-async function readInput(module: ModuleConfig, callback: (args: { content: string; path: string }) => Promise<any>) {
-  const paths = getSvgPaths(module.input);
+async function readInput(
+  module: ModuleConfig,
+  config: Config,
+  callback: (args: { content: string; path: string }) => Promise<any>
+) {
+  const paths = getSvgPaths(join(config.baseInputDir ?? "", module.input));
   for (const path of paths) {
     const rawContent = await readFile(path, "utf-8");
     await callback({ content: rawContent, path });

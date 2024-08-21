@@ -6,15 +6,17 @@ import { join } from "path";
 
 describe("[vue-inline-strategy]", () => {
   const baseOutputDir = "./.svgpipe/vue-inline-strategy";
+  const baseInputDir = "./test/fixtures";
   const snapshotDir = "./__snapshots__/vue-inline-strategy";
 
   it("Should match snapshot when creating token and type file", async () => {
     const config: Config = {
       baseOutputDir,
+      baseInputDir,
       modules: [
         {
-          input: "test/fixtures/svgs",
-          output: "./svgs",
+          input: "svgs",
+          output: "svgs",
           strategy: [
             "vue-inline",
             {
@@ -42,10 +44,11 @@ describe("[vue-inline-strategy]", () => {
   it("Should match snapshot when no additional files", async () => {
     const config: Config = {
       baseOutputDir,
+      baseInputDir,
       modules: [
         {
-          input: "test/fixtures/svgs",
-          output: "./svgs",
+          input: "svgs",
+          output: "svgs",
           strategy: [
             "vue-inline",
             {
