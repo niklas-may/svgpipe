@@ -1,12 +1,16 @@
 import { camelCase, kebabCase } from "change-case-all";
 import { File } from "../main";
 import { IFile, IFileArgs } from "../types";
+import { TypeFile } from "./type-file";
 
 interface ITokenFileArgs extends Omit<IFileArgs, "content" | "extension"> {}
 
 export class TokenFile extends File {
   private options: string[] = [];
+  private imports: string[] = [];
+
   tokenName: string;
+  tokenType: string = ""
 
   constructor(args: ITokenFileArgs) {
     super({ content: "", extension: "ts", name: camelCase(`${args.name}Tokens`), path: args.path });
@@ -15,12 +19,19 @@ export class TokenFile extends File {
   }
 
   process(file: IFile) {
+    if(file instanceof TypeFile){
+      this.imports.push(file.getImport(this.path));
+      this.tokenType = file.typeName;
+      return this
+    }
     this.addOption(file);
     return this;
   }
 
   build() {
-    this.content = `export const ${this.tokenName} = [${this.options.join(", ")}]`;
+    const tokenType = this.tokenType ? `: ${this.tokenType}[]` : "";
+    const imports = this.imports.join("\n");
+    this.content = `${imports}\n export const ${this.tokenName}${tokenType} = [${this.options.join(", ")}]`;
     return this;
   }
 

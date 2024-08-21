@@ -96,6 +96,8 @@ export class VueInlineStrategy implements IStrategy {
     }
 
     if (tokenPath) {
+      if(typePath) this.tokenFile.process(this.typeFile);
+
       this.tokenFile.build();
       this.files.push(this.tokenFile);
     }
