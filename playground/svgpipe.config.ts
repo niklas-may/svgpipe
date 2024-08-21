@@ -1,12 +1,14 @@
 import { defineConfig } from "../src/core/config";
 
 export default defineConfig({
-  baseOutputDir: "playground/.svgpipe",
+  baseOutputDir: "playground/.svgpipe/output",
+  baseInputDir: "playground/.svgpipe/input",
   modules: [
     {
-      input: "./test/fixtures/svgs",
-      output: "./playground/svg/logos",
-      strategy: "vue-inline",
+      input: "/icons",
+      output: "/svg/icons",
+      strategy: ["vue-inline", {tokenPath: "tokens",}],
+      
     },
   ],
 });
