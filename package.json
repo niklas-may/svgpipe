@@ -34,7 +34,7 @@
     "test": "vitest run",
     "release": "pnpm test && pnpm build && changelogen --release && npm publish && git push --follow-tags"
   },
-  "packageManager": "pnpm@9.5.0",
+  "packageManager": "pnpm@9.7.1",
   "devDependencies": {
     "@types/lodash": "^4.17.7",
     "@types/node": "^20.14.11",
