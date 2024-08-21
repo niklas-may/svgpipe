@@ -1,6 +1,34 @@
 # Changelog
 
 
+## v0.0.12
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.11...v0.0.12)
+
+### 🚀 Enhancements
+
+- Proptypes are applied to token file ([f562f56](https://github.com/niklas-may/svgpipe/commit/f562f56))
+- BaseDir config does now exist for input and output ([124381d](https://github.com/niklas-may/svgpipe/commit/124381d))
+
+### 🩹 Fixes
+
+- Typo ([6d937e0](https://github.com/niklas-may/svgpipe/commit/6d937e0))
+- Typos ([ec384e7](https://github.com/niklas-may/svgpipe/commit/ec384e7))
+- Default strategy import ([dff33f8](https://github.com/niklas-may/svgpipe/commit/dff33f8))
+- Renamed option baseDir to baseOutputDir ([6b87f3e](https://github.com/niklas-may/svgpipe/commit/6b87f3e))
+
+### ✅ Tests
+
+- Added tests for typed tokens ([64913e5](https://github.com/niklas-may/svgpipe/commit/64913e5))
+
+### 🎨 Styles
+
+- Cleanup ([5a955e6](https://github.com/niklas-may/svgpipe/commit/5a955e6))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.11
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.10...v0.0.11)
