@@ -41,6 +41,31 @@ describe("[vue-inline-strategy]", () => {
     expect(file?.content).toMatchFileSnapshot(join(snapshotDir, "tokens.ts"));
   });
 
+  it("Should match snapshot when for token file with no types", async () => {
+    const config: Config = {
+      baseOutputDir,
+      baseInputDir,
+      modules: [
+        {
+          input: "svgs",
+          output: "svgs",
+          strategy: [
+            "vue-inline",
+            {
+              typePath: "",
+              tokenPath: "/tokens",
+              componentName: "BaseIcon2"
+            },
+          ],
+        },
+      ],
+    };
+    const [vueInlineStrategy] = await run(config);
+
+    const file = vueInlineStrategy.files.find((file) => file.name === "baseIcon2Tokens");
+    expect(file?.content).toMatchFileSnapshot(join(snapshotDir, "tokens-with-no-types.ts"));
+  });
+
   it("Should match snapshot when no additional files", async () => {
     const config: Config = {
       baseOutputDir,
