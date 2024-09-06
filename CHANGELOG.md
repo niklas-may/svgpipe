@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.13
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.12...v0.0.13)
+
+### 🩹 Fixes
+
+- Better uniqe id handling for vue inline strategy ([5d09d4a](https://github.com/niklas-may/svgpipe/commit/5d09d4a))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.12
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.11...v0.0.12)
