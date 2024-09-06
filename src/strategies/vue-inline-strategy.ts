@@ -2,6 +2,7 @@ import type { CombinedModuleConfig, ModuleConfigParse, IStrategy, IFile, Strateg
 
 import { kebabCase, pascalCase } from "change-case-all";
 import defu from "defu";
+import uniqueId from "lodash/uniqueId";
 import { join, relative } from "node:path";
 import { File } from "../core/file";
 import { TypeFile } from "../files/type-file";
@@ -24,6 +25,7 @@ const defaultOptions: ModuleConfigParse<Options> = {
       "sortAttrs",
       "removeTitle",
       "cleanupIds",
+      { name: "prefixIds", params: { prefix: () => uniqueId() } },
       {
         name: "convertColors",
         params: {
@@ -73,7 +75,7 @@ export class VueInlineStrategy implements IStrategy {
   }
 
   public process(svgs: IFile[]): void {
-    const {typePath, tokenPath } = this.options.module.strategyConfig
+    const { typePath, tokenPath } = this.options.module.strategyConfig;
 
     if (typePath) {
       const typeImport = this.typeFile.getImport(this.vueFile.path);
@@ -96,7 +98,7 @@ export class VueInlineStrategy implements IStrategy {
     }
 
     if (tokenPath) {
-      if(typePath) this.tokenFile.process(this.typeFile);
+      if (typePath) this.tokenFile.process(this.typeFile);
 
       this.tokenFile.build();
       this.files.push(this.tokenFile);

@@ -21,7 +21,7 @@ async function processModule(module: ModuleConfig, config: Config): Promise<IStr
   const svgs: File[] = [];
 
   const strategy = creatStrategy(module, config);
-  const svgoOptions = defu(module.svgo, strategy.options.module.svgo);
+  const svgoOptions = strategy.options.module.svgo;
 
   await readInput(module, config, async ({ content, path }) => {
     const { data } = optimize(content, { path, ...svgoOptions });
