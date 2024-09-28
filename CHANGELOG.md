@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.15
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.14...v0.0.15)
+
+### 🩹 Fixes
+
+- Bug in default in path ([a4ee812](https://github.com/niklas-may/svgpipe/commit/a4ee812))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.14
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.13...v0.0.14)
