@@ -48,7 +48,7 @@ export function createConfig(config: UserConfig): Record<string, ModuleConfig> {
   for (const [name, maybeModule] of Object.entries(config.modules)) {
     const module = getModule(maybeModule);
 
-    const basePath = module.ignoreBase ? "" : (config.baseOut ?? "svgpipe/.out");
+    const basePath = module.ignoreBase ? "" : (config.baseOut ?? "svgpipe");
     const inPath = join(basePath, module.in || `in/${name}`);
 
     const outFolder = module.ignoreBase ? "" : ".out";
