@@ -30,7 +30,7 @@
   "scripts": {
     "build": "unbuild",
     "dev:test": "vitest watch",
-    "dev:cli": "node --watch --loader ts-node/esm ./src/cli.ts run -c ./playground/",
+    "dev:cli": "node --watch --loader ts-node/esm --require tsconfig-paths/register ./src/cli.ts",
     "test": "vitest run",
     "release": "pnpm test && pnpm build && changelogen --release && npm publish && git push --follow-tags"
   },
@@ -41,8 +41,10 @@
     "@types/svgo": "^3.0.0",
     "changelogen": "^0.5.5",
     "ts-node": "^10.9.2",
+    "tsconfig-paths": "^4.2.0",
     "typescript": "^5.5.3",
     "unbuild": "^2.0.0",
+    "vite-tsconfig-paths": "^5.0.1",
     "vitest": "^2.0.3"
   },
   "dependencies": {

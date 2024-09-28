@@ -1,37 +1,56 @@
-import type { Config } from "src/types";
-
-import { describe, it, expectTypeOf } from "vitest";
-import { defineConfig } from "./config";
+import { describe, expect, it } from "vitest";
+import { createConfig, defineConfig } from "./config";
+import { join } from "path";
 
 describe("[Config]", () => {
-  describe("defineConfig", () => {
-    it("String config should not have TS error", async () => {
-      const config = defineConfig({
-        baseOutputDir: ".svgpipe",
-        modules: [
-          {
-            input: "./test/fixtures/svgs",
-            output: "./svg/logos",
-            strategy: "vue-inline",
-          },
-        ],
-      });
+  const snapshotDir = "./__test__/snapshot/config";
 
-      expectTypeOf(config).toMatchTypeOf<Config>();
+  it("UserConfig to Config should match snapshot", () => {
+    const userConfig = defineConfig({
+      baseOut: "./svgpipe",
+      modules: {
+        lorem: {
+          handler: "vue-inline",
+          prepareName: (name) => name,
+          tokenPath: "/my-tokenPath",
+          typePath: "/my-typePath",
+          in: "/my-in",
+          out: "/my-out",
+          svgo: {
+            replace: false,
+            config: {
+              plugins: [
+                {
+                  name: "removeDoctype",
+                },
+              ],
+            },
+          },
+        },
+        ipsum: {
+          handler: () => ({}),
+          prepareName: (name) => name,
+          ignoreBase: true,
+          tokenPath: "/my-tokenPath",
+          typePath: "/my-typePath",
+          in: "/my-in",
+          out: "/my-out",
+          svgo: {
+            replace: true,
+            config: {
+              plugins: [
+                {
+                  name: "removeDoctype",
+                },
+              ],
+            },
+          },
+        },
+        dolor: "vue-inline",
+      },
     });
 
-    it("Array config should not have TS error", async () => {
-      const config = defineConfig({
-        baseOutputDir: ".svgpipe",
-        modules: [
-          {
-            input: "./test/fixtures/svgs",
-            output: "./svg/logos",
-            strategy: ["vue-inline", { componentName: "BaseIcon", componentPath: "./components" }],
-          },
-        ],
-      });
-      expectTypeOf(config).toMatchTypeOf<Config>();
-    });
+    const config = createConfig(userConfig);
+    expect(config).toMatchFileSnapshot(join(snapshotDir, "config.text"));
   });
 });

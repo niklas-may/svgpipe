@@ -1,3 +1,4 @@
+import path from "path";
 import { defineBuildConfig } from "unbuild";
 
 export default defineBuildConfig({

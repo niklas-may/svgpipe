@@ -1,0 +1,3 @@
+import type { SvgLogo } from "../types/logo-types";
+
+export const logoTokens: SvgLogo[] = ["x-octagon", "you-tube", "zoom-out"];

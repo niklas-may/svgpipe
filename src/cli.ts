@@ -1,11 +1,13 @@
-#! /usr/bin/env node
+import type { UserConfig } from "./core/config";
 
 import path from "node:path";
 import { defineCommand, runMain } from "citty";
 import { loadConfig } from "c12";
 import pkg from "./../package.json" assert { type: "json" };
-import { run } from "./core/app";
-import { Config } from "./types";
+import { runApp } from "./core/app";
+import { report } from "./core/reporter";
+import { File } from "./main";
+import { mkdir } from "node:fs/promises";
 
 const runCommand = defineCommand({
   meta: {
@@ -21,16 +23,54 @@ const runCommand = defineCommand({
   },
   run: async ({ args }) => {
     const configPath = path.resolve((args?.c as string) ?? process.cwd());
-    const { config } = await loadConfig<Config>({
+    const { config } = await loadConfig<UserConfig>({
       name: "svgpipe",
       cwd: configPath,
     });
 
-    await run(config);
+    const info = await runApp(config);
+    report(info);
   },
 });
 
-const main = defineCommand({
+const initCommand = defineCommand({
+  meta: {
+    name: "init",
+    description: "Generate a config file and svgpipe directory",
+  },
+  args: {
+    out: {
+      type: "string",
+      description: "Base output directory",
+      required: false,
+    },
+  },
+  run: async ({ args }) => {
+    const basePath = path.resolve((args?.out as string) ?? process.cwd());
+    const configFile = new File({
+      name: "svgpipe.config",
+      extension: "ts",
+      path: basePath,
+      content: `
+        import { defineConfig } from "svgpipe";
+
+        export default defineConfig({
+          modules: {},
+        }) 
+      `,
+    });
+
+
+    await Promise.all([
+      configFile.write(),
+      mkdir(path.join(basePath, "svgpipe"))
+        .catch(() => {})
+        .then(() => mkdir(path.join(basePath, "svgpipe", "in")).catch(() => {})),
+    ]);
+  },
+});
+
+export const main = defineCommand({
   meta: {
     name: pkg.name,
     version: pkg.version,
@@ -38,6 +78,7 @@ const main = defineCommand({
   },
   subCommands: {
     run: runCommand,
+    init: initCommand,
   },
 });
 

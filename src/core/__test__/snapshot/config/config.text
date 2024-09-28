@@ -1,0 +1,56 @@
+{
+  "dolor": {
+    "handler": [Function],
+    "ignoreBase": false,
+    "in": "svgpipe/in/dolor",
+    "name": "dolor",
+    "out": "svgpipe/.out",
+    "prepareName": undefined,
+    "svgo": {
+      "config": {},
+      "replace": false,
+    },
+    "tokenPath": "svgpipe/.out/tokens",
+    "typePath": "svgpipe/.out/types",
+  },
+  "ipsum": {
+    "handler": [Function],
+    "ignoreBase": true,
+    "in": "/my-in",
+    "name": "ipsum",
+    "out": ".",
+    "prepareName": [Function],
+    "svgo": {
+      "config": {
+        "plugins": [
+          {
+            "name": "removeDoctype",
+          },
+        ],
+      },
+      "replace": true,
+    },
+    "tokenPath": "my-tokenPath",
+    "typePath": "my-typePath",
+  },
+  "lorem": {
+    "handler": [Function],
+    "ignoreBase": false,
+    "in": "svgpipe/my-in",
+    "name": "lorem",
+    "out": "svgpipe/.out",
+    "prepareName": [Function],
+    "svgo": {
+      "config": {
+        "plugins": [
+          {
+            "name": "removeDoctype",
+          },
+        ],
+      },
+      "replace": false,
+    },
+    "tokenPath": "svgpipe/.out/my-tokenPath",
+    "typePath": "svgpipe/.out/my-typePath",
+  },
+}

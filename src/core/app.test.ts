@@ -1,84 +1,45 @@
-import type { Config } from "./../types";
+import type { UserConfig } from "./config";
 
-import { describe, it } from "vitest";
-import { run } from "./app";
-import { MyStrategy } from "../../test/fixtures/strategies/custom";
+import { describe, expect, it } from "vitest";
 import { join } from "path";
+import { runApp } from "./app";
+import { defineConfig } from "./config";
 
 describe("[App]", () => {
-  const baseOutputDir = join("./.svgpipe", "app");
+  const baseOut = join("./__test__/svgpipe");
 
-  describe("Build in strategy", () => {
-    it("No options", async () => {
-      const config: Config = {
-        baseOutputDir,
-        modules: [
-          {
-            input: "test/fixtures/svgs",
-            output: "./svgs/logos",
-            strategy: "vue-inline",
-          },
-        ],
-      };
-
-      await run(config);
-    });
-
-    it("Options", async () => {
-      const config: Config = {
-        baseOutputDir,
-        modules: [
-          {
-            input: "./test/fixtures/svgs",
-            output: "./svgs",
+  it("Should process every model config style", async () => {
+    const cases: UserConfig[] = [
+      defineConfig({
+        baseOut,
+        modules: {
+          logo: "vue-inline",
+        },
+      }),
+      defineConfig({
+        baseOut,
+        modules: {
+          logo: {
+            handler: "vue-inline",
             svgo: {
-              multipass: true,
+              stdout: true,
             },
-            strategy: [
-              "vue-inline",
-              {
-                componentPath: "./components",
-              },
-            ],
           },
-        ],
-      };
-      await run(config);
-    });
-  });
+        },
+      }),
+      defineConfig({
+        baseOut,
+        modules: {
+          logo: {
+            handler: () => ({}),
+          },
+        },
+      }),
+    ];
 
-  describe("Custom strategy", () => {
-    it("No Options", async () => {
-      const config: Config = {
-        baseOutputDir: join(baseOutputDir, "custom"),
-        modules: [
-          {
-            input: "./test/fixtures/svgs",
-            output: "./svgs",
-            strategy: [MyStrategy],
-          },
-        ],
-      };
-      await run(config);
-    });
-
-    it("Options", async () => {
-      const config: Config = {
-        baseOutputDir,
-        modules: [
-          {
-            input: "./test/fixtures/svgs",
-            output: "./svgs",
-            strategy: [
-              MyStrategy,
-              {
-                componentName: "MyComponent",
-              },
-            ],
-          },
-        ],
-      };
-      await run(config);
-    });
+    for (const userConfig of cases) {
+      const info = await runApp(userConfig);
+      expect(info).toBeDefined();
+    }
   });
 });

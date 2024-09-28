@@ -1,6 +1,6 @@
 # svgpipe
 
-A flexible wrapper arround svgo for furher SVG processing or to add addtional files. Svgpipe comes with predefined strategies, but it is easy to create your own. For example, build an icon component based on your SVG files.
+A flexible wrapper arround svgo for furher SVG processing or to add addtional files. Svgpipe comes with predefined handlers, but it is easy to create your own. For example, build an icon component based on your SVG files.
 
 ## Installation
 
@@ -13,6 +13,7 @@ A flexible wrapper arround svgo for furher SVG processing or to add addtional fi
 ## Usage
 
 ```bash
+npx svgpipe init
 npx svgpipe run
 ```
 
@@ -29,38 +30,43 @@ npx svgpipe --help
 import { defineConfig } from "svgpipe";
 
 export default defineConfig({
-  baseOutputDir: ".svgpipe", // that's the default
-  modules: [
-    {
-      input: "./assets/svgs/logos",
-      output: "output/svgs/logos", // relative to the base dir
-      strategy: "vue-inline", // use builtin strategy with no options
-    },
-    {
-      input: "./assets/svgs/icons",
-      output: "output/svg/icons",
+  baseOutputDir: "svgpipe", // that's the default
+  // You can process multiple folders (moduls) with svgs each with its own config
+  modules: {
+    // Create a module with a predefined handler
+    inputFolderName: "vue-inline",
+    // Or pass options to the predefined handler
+    anotherInput: {
+      handler: "vue-inline"
       svgo: {
-        multipass: true, // optionally change svgo options
-      },
-      strategy: [
-        "vue-inline", // Array syntax to pass options to the strategy
-        {
-          componentName: "BaseIcon",
-          componentPath: "./components",
-        },
-      ],
+        // custom config
+        config: {},
+        // opt out of the default merging behaviour
+        replace: true,
+        // print the config o the terminal
+        stdout: true
+      }
     },
-    {
-      input: "./assets/svgs/",
-      output: "output/svg/graphics",
-      strategy: [MyCustomStrategy, {}], // Add your own strategy as a class
-    },
-  ],
+    // Create your own handler
+    oneMoreInput: {
+      handler: (conf) => ({
+        onFile(svgFile){
+          // do your thing with with every svgo processed file
+          // return it if you want to keep it
+          return svgFile
+        }
+        onEnd(ctx) {
+          // cleanup or create custom files like a css file
+          // return [customFile]
+        }
+      })
+    }
+  },
 });
 
 ```
 
-## Strategies
+## Handlers 
 
 ### Built in
 
@@ -68,57 +74,14 @@ export default defineConfig({
 
 Creates a vue component that imports all SVGs. This components depends on `vite-svg-loader`.
 
-[Example output](https://github.com/niklas-may/svgpipe/tree/main/src/strategies/__snapshots__/vue-inline-strategy)
+[Example output](https://github.com/niklas-may/svgpipe/tree/main/src/handler/__snapshots__/component.vue.txt)
 
-**Options**
+### Create custom handler
+Imlement a `CreateHandler`. This is a function that recieves ervery processed module config and returns a `ISvgHandler`. This has three properties. `onFile`: Will be called for every processed input svg file. Retrun the file if you want to keep it. `onEnd`: Will be called with the `Context` after all svgs are processed. The `Context` provides a type handler that creates a TypeScript type for the module and a corresponding token handler. 
 
-| Property      | Default       | Note                                                                               |
-| :------------ | :------------ | :--------------------------------------------------------------------------------- |
-| componentName | "BaseIcon"    |                                                                                    |
-| componentPath | "/components" |                                                                                    |
-| typePath      | "/types"      | Pass an empty string to define the type in the component file.                     |
-| tokenPath     | ""            | Generates a array with all the token names. Pass an empty sring to skip this file. |
-
-#### `default`
-
-Just outputs the processed SVGs.
-
-### Create custom
-
-- A strategy provides options to svgo via the `options` property. The user options are passed into the constructor.
-- A strategy receives all processed SVG files as an argument in the `process` method
-- A strategy provides all files that will be written to disk via the `files` property
 
 ```TypeScript
-import type { IFile, IStrategy, CombinedModuleConfig } from "svgpipe";
-import { File } from "svgpipe";
+import type { CreateHandler } from "svgpipe"
 
-export interface MyOptions {
-  foo: string;
-}
-
-export class MyStrategy implements IStrategy {
-  options: CombinedModuleConfig<MyOptions>;
-  files: IFile[] = [];
-
-  constructor(options: CombinedModuleConfig<MyOptions>) {
-    // Optional: apply default to options
-    this.options = options;
-  }
-
-  process(files: IFile[]) {
-    // Optional: Do something with the files or just add them to the files array
-    this.files = files;
-
-    // Optional: Add a new file
-    const myFile = new File({
-      content: "My component content",
-      extension: "tsx",
-      name: "MyComponent",
-      path: this.options.module.output,
-    });
-
-    this.files.push(myFile);
-  }
-}
+const myHanlder: CreateHandler = (conf) => ({})
 ```
