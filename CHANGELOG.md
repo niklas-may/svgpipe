@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.16
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.15...v0.0.16)
+
+### 🚀 Enhancements
+
+- Added new handler ([444d48e](https://github.com/niklas-may/svgpipe/commit/444d48e))
+
+### 🩹 Fixes
+
+- Import path ([5aa1b94](https://github.com/niklas-may/svgpipe/commit/5aa1b94))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.15
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.14...v0.0.15)
