@@ -6,8 +6,8 @@ import { TokenHandler } from "../handler/token-handler";
 import { TypeHandler } from "../handler/type-handler";
 import { VueInlineHandler } from "../handler/vue-inline-handler";
 import { File } from "./file";
-import { CssMaskHandler } from "src/handler/css-mask-handler";
-import { VueCssMaskHandler } from "src/handler/vue-css-mask-handler";
+import { CssMaskHandler } from "../handler/css-mask-handler";
+import { VueCssMaskHandler } from "../handler/vue-css-mask-handler";
 
 export interface ISvgHandler {
   config?: SvgoConfig;

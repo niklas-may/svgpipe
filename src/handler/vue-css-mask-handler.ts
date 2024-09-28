@@ -4,7 +4,7 @@ import type { ISvgHandler } from "../core/handler";
 import type { Context } from "../core/handler";
 
 import { join } from "path";
-import { pascalCase, kebabCase } from "change-case-all";
+import { pascalCase } from "change-case-all";
 import { File } from "../core/file";
 import { CssMaskHandler } from "./css-mask-handler";
 
