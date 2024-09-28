@@ -30,7 +30,6 @@
   "scripts": {
     "build": "unbuild",
     "dev:test": "vitest watch",
-    "dev:cli": "node --watch --loader ts-node/esm --require tsconfig-paths/register ./src/cli.ts",
     "test": "vitest run",
     "release": "pnpm test && pnpm build && changelogen --release && npm publish && git push --follow-tags"
   },
