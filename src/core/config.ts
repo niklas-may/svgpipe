@@ -3,7 +3,6 @@ import type { CreateHandler, DefaultHandlerName } from "./handler";
 
 import { join } from "path";
 import { defaultHandler } from "./handler";
-import defu from "defu";
 
 export type UserConfig = {
   baseOut?: string;

@@ -14,19 +14,13 @@ describe("[vue-inline-handler]", () => {
       baseOut,
       baseIn,
       modules: {
-        logo: "vue-inline",
+        logo: "vue-css-mask",
       },
     })
     const report = await runApp(userConfig); 
 
     const componentReport = report.fileReports.find((f) => f.file.extension === "vue");
-    expect(componentReport?.file.content).toMatchFileSnapshot(join(snapshotDir, "vue-inline.vue.txt"));
-
-    const typeFile = report.fileReports.find((f) =>  f.file.name.endsWith("-types"));
-    expect(typeFile?.file.content).toMatchFileSnapshot(join(snapshotDir, "types.ts.txt"));
-
-    const tokenFile = report.fileReports.find((f) => f.file.name.endsWith("-tokens"));
-    expect(tokenFile?.file.content).toMatchFileSnapshot(join(snapshotDir, "tokens.ts.txt"));
+    expect(componentReport?.file.content).toMatchFileSnapshot(join(snapshotDir, "vue-css-mask.vue.txt"));
   });
 
 });

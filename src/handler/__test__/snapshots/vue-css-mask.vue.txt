@@ -1,0 +1,40 @@
+<template>
+  <i class="svg-icon" :class="name"></i>
+</template>
+<script setup lang="ts">
+import type { SvgLogo } from "../types/logo-types";
+
+defineProps<{ name: SvgLogo }>();
+</script>
+<style>
+.svg-logo {
+  --size: 1em;
+
+  display: inline-block;
+  mask-size: 100% 100%;
+  background-color: currentColor;
+  height: var(--size);
+  width: var(--size);
+  min-height: var(--size);
+  min-width: var(--size);
+  vertical-align: middle;
+}
+
+.svg-logo.-svg-logo-x-octagon {
+  mask-image: var(--svg-logo-x-octagon);
+}
+
+.svg-logo.-svg-logo-you-tube {
+  mask-image: var(--svg-logo-you-tube);
+}
+
+.svg-logo.-svg-logo-zoom-out {
+  mask-image: var(--svg-logo-zoom-out);
+}
+
+:root {
+  --svg-logo-x-octagon: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' class='3__1__7__5__3__1__feather 4__2__8__6__4__2__feather-x-octagon' viewBox='0 0 24 24'%3E%3Cpolygon points='7.86 2 16.14 2 22 7.86 22 16.14 16.14 22 7.86 22 2 16.14 2 7.86 7.86 2'/%3E%3Cline x1='15' x2='9' y1='9' y2='15'/%3E%3Cline x1='9' x2='15' y1='9' y2='15'/%3E%3C/svg%3E");
+  --svg-logo-you-tube: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' class='7__5__11__9__7__5__feather 8__6__12__10__8__6__feather-youtube' viewBox='0 0 24 24'%3E%3Cpath d='M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33A2.78 2.78 0 0 0 3.4 19c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.25 29 29 0 0 0-.46-5.33z'/%3E%3Cpolygon points='9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02'/%3E%3C/svg%3E");
+  --svg-logo-zoom-out: url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' stroke='currentColor' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' class='11__9__15__13__11__9__feather 12__10__16__14__12__10__feather-zoom-out' viewBox='0 0 24 24'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' x2='16.65' y1='21' y2='16.65'/%3E%3Cline x1='8' x2='14' y1='11' y2='11'/%3E%3C/svg%3E");
+}
+</style>

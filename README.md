@@ -31,57 +31,53 @@ import { defineConfig } from "svgpipe";
 
 export default defineConfig({
   baseOutputDir: "svgpipe", // that's the default
-  // You can process multiple folders (moduls) with svgs each with its own config
+  // You can process multiple folders with svgs (modules) each with its own config
   modules: {
     // Create a module with a predefined handler
-    inputFolderName: "vue-inline",
+    inputFolderName: "css-mask",
     // Or pass options to the predefined handler
     anotherInput: {
-      handler: "vue-inline"
+      handler: "css-mask"
       svgo: {
         // custom config
         config: {},
-        // opt out of the default merging behaviour
+        // opt out of the default merge behaviour
         replace: true,
-        // print the config o the terminal
+        // print the config to the terminal
         stdout: true
       }
     },
     // Create your own handler
     oneMoreInput: {
-      handler: (conf) => ({
-        onFile(svgFile){
-          // do your thing with with every svgo processed file
-          // return it if you want to keep it
-          return svgFile
-        }
-        onEnd(ctx) {
-          // cleanup or create custom files like a css file
-          // return [customFile]
-        }
-      })
+      handler: (conf) => ({})
     }
   },
 });
 
 ```
 
-## Handlers 
+## Handlers
 
 ### Built in
 
-#### `vue-inline`
-
-Creates a vue component that imports all SVGs. This components depends on `vite-svg-loader`.
-
-[Example output](https://github.com/niklas-may/svgpipe/tree/main/src/handler/__snapshots__/component.vue.txt)
+| name           | output                                                                                                       |  note                        |
+| :------------- | :----------------------------------------------------------------------------------------------------------- | :--------------------------- |
+| `css-mask`     | [view](https://github.com/niklas-may/svgpipe/tree/main/src/handler/__test__/snapshots/css-mask.css.txt)      |                              |
+| `vue-css-mask` | [view](https://github.com/niklas-may/svgpipe/tree/main/src/handler/__test__/snapshots/vue-css-mask.css.txt)  |                              |
+| `vue-inline`   | [view](https://github.com/niklas-may/svgpipe/tree/main/src/handler/__test__/snapshots/vue-inline.vue.txt)    | depends on `vite-svg-loader` |
 
 ### Create custom handler
-Imlement a `CreateHandler`. This is a function that recieves ervery processed module config and returns a `ISvgHandler`. This has three properties. `onFile`: Will be called for every processed input svg file. Retrun the file if you want to keep it. `onEnd`: Will be called with the `Context` after all svgs are processed. The `Context` provides a type handler that creates a TypeScript type for the module and a corresponding token handler. 
 
+Implement a `CreateHandler`. This is a function that recieves ervery processed module config and returns a `ISvgHandler`. This has three properties. `onFile`: Will be called for every processed input svg file. Retrun the file if you want to keep it. `onEnd`: Will be called with the `Context` after all svgs are processed. The `Context` provides a type handler that creates a TypeScript type for the module and a corresponding token handler. The last property is the `SvgoConfig`. This can be modified from the user config.
 
 ```TypeScript
 import type { CreateHandler } from "svgpipe"
 
-const myHanlder: CreateHandler = (conf) => ({})
+const myHanlder: CreateHandler = (conf) => ({
+  config: {
+    multipass: true
+  },
+  onFile: (svgFile) => svgFile,
+  onEnd: ctx => []
+})
 ```
