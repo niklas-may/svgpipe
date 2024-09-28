@@ -38,6 +38,7 @@ export default defineConfig({
     // Or pass options to the predefined handler
     anotherInput: {
       handler: "css-mask"
+      prepareName: (name) => "my-" + name
       svgo: {
         // custom config
         config: {},
