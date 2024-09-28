@@ -63,7 +63,7 @@ export default defineConfig({
 | name           | output                                                                                                       |  note                        |
 | :------------- | :----------------------------------------------------------------------------------------------------------- | :--------------------------- |
 | `css-mask`     | [view](https://github.com/niklas-may/svgpipe/tree/main/src/handler/__test__/snapshots/css-mask.css.txt)      |                              |
-| `vue-css-mask` | [view](https://github.com/niklas-may/svgpipe/tree/main/src/handler/__test__/snapshots/vue-css-mask.css.txt)  |                              |
+| `vue-css-mask` | [view](https://github.com/niklas-may/svgpipe/tree/main/src/handler/__test__/snapshots/vue-css-mask.vue.txt)  |                              |
 | `vue-inline`   | [view](https://github.com/niklas-may/svgpipe/tree/main/src/handler/__test__/snapshots/vue-inline.vue.txt)    | depends on `vite-svg-loader` |
 
 ### Create custom handler
