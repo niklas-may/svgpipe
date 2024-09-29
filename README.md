@@ -69,8 +69,8 @@ npx svgpipe run
 | `typePath`?    | `string`                   | {baseOut}/types              | Folder for the TypeScript type file. This has a type with all the SVG names as string literals. |
 | `tokenPath`?   | `string`                   | {baseOut}/token              | Folder for the TypeScript token file. This has a variable with an array with all SVG names.     |
 | `ignoreBase`?  | `boolean`                  | false                        | Don't prepend the base path.                                                                    |
-| `prepareName`? | `(str: string) => string`  |                              | Modify the svg file name. The name will be used for types, classes e.g.                         |
-| `handler`      | `CreateHandler`            |                              | The actual svg handle.                                                                          |
+| `prepareName`? | `(str: string) => string`  |                              | Modify the SVG file name. The name will be used for types, classes e.g.                         |
+| `handler`      | `CreateHandler`            |                              | The actual SVG handle.                                                                          |
 | `svgo`?        | `UserModuleConfig["svgo"]` | {}                           | SVGO Options.                                                                                   |
 
 #### SVGO
