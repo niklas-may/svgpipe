@@ -104,15 +104,15 @@ const myHanlder: CreateHandler = (moduleConfig) => ({
 
 Implement a `CreateHandler`. This is a function that recieves every processed module config and returns a `ISvgHandler`.
 
-### `onFile`:
+### `onFile`
 
 Will be called for every processed input svg file. Retrun the file if you want to keep it.
 
-### `onEnd`:
+### `onEnd`
 
 Will be called with the `Context` after all SVGs are processed. Return nothing or `IFile[]` with additional files that you want to write to disk. `Context` provides a type handler that creates a TypeScript type file for the module and a corresponding token handler.
 
-### `config`.
+### `config`
 
 The default SVGO config that should be used. This can be modified from the user config.
 
