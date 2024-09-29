@@ -44,7 +44,7 @@ export async function runApp(userConfig: UserConfig): Promise<AppInfo> {
 
       const svgFile = new File({
         name: kebabCase(moduleConfig.prepareName ? moduleConfig.prepareName(name) : name),
-        path: join(moduleConfig.out, "svgs"),
+        path: join(moduleConfig.out, "svgs", module.name),
         content: data,
         extension: "svg",
       });
@@ -62,7 +62,7 @@ export async function runApp(userConfig: UserConfig): Promise<AppInfo> {
   }
 
   const fileReports = await Promise.all(files);
-  await cleanup(config, fileReports);
+  if (userConfig.cleanup !== false) await cleanup(config, fileReports);
 
   return {
     fileReports,

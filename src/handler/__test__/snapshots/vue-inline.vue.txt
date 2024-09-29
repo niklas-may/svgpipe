@@ -6,9 +6,9 @@
 <script setup lang="ts">
 import type { SvgLogo } from "../types/logo-types";
 
-import SvgXOctagon from "../svgs/x-octagon.svg?component";
-import SvgYouTube from "../svgs/you-tube.svg?component";
-import SvgZoomOut from "../svgs/zoom-out.svg?component";
+import SvgXOctagon from "../svgs/logo/x-octagon.svg?component";
+import SvgYouTube from "../svgs/logo/you-tube.svg?component";
+import SvgZoomOut from "../svgs/logo/zoom-out.svg?component";
 
 defineProps<{ name: SvgLogo }>();
 </script>

@@ -60,12 +60,9 @@ const initCommand = defineCommand({
       `,
     });
 
-
     await Promise.all([
       configFile.write(),
-      mkdir(path.join(basePath, "svgpipe"))
-        .catch(() => {})
-        .then(() => mkdir(path.join(basePath, "svgpipe", "in")).catch(() => {})),
+      mkdir(path.join(basePath, "svgpipe", "in"), { recursive: true })
     ]);
   },
 });

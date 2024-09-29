@@ -1,11 +1,9 @@
 {
   "dolor": {
-    "handler": [Function],
     "ignoreBase": false,
     "in": "svgpipe/in/dolor",
     "name": "dolor",
     "out": "svgpipe/.out",
-    "prepareName": undefined,
     "svgo": {
       "config": {},
       "replace": false,
@@ -14,43 +12,39 @@
     "typePath": "svgpipe/.out/types",
   },
   "ipsum": {
-    "handler": [Function],
-    "ignoreBase": true,
-    "in": "/my-in",
-    "name": "ipsum",
-    "out": ".",
-    "prepareName": [Function],
-    "svgo": {
-      "config": {
-        "plugins": [
-          {
-            "name": "removeDoctype",
-          },
-        ],
-      },
-      "replace": true,
-    },
-    "tokenPath": "my-tokenPath",
-    "typePath": "my-typePath",
-  },
-  "lorem": {
-    "handler": [Function],
     "ignoreBase": false,
     "in": "svgpipe/my-in",
-    "name": "lorem",
-    "out": "svgpipe/.out",
-    "prepareName": [Function],
+    "name": "ipsum",
+    "out": "svgpipe/my-out",
     "svgo": {
-      "config": {
-        "plugins": [
-          {
-            "name": "removeDoctype",
-          },
-        ],
-      },
+      "config": {},
       "replace": false,
     },
-    "tokenPath": "svgpipe/.out/my-tokenPath",
-    "typePath": "svgpipe/.out/my-typePath",
+    "tokenPath": "svgpipe/my-out/my-tokenPath",
+    "typePath": "svgpipe/my-out/my-typePath",
+  },
+  "lorem": {
+    "ignoreBase": true,
+    "in": "/my-in",
+    "name": "lorem",
+    "out": "/my-out",
+    "svgo": {
+      "config": {},
+      "replace": false,
+    },
+    "tokenPath": "/my-tokenPath",
+    "typePath": "/my-typePath",
+  },
+  "salip": {
+    "ignoreBase": true,
+    "in": "/my-in",
+    "name": "salip",
+    "out": "/my-out",
+    "svgo": {
+      "config": {},
+      "replace": false,
+    },
+    "tokenPath": "",
+    "typePath": "",
   },
 }

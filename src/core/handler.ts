@@ -22,8 +22,8 @@ export type Context = {
 
 export type CreateHandler = (config: ModuleConfig) => ISvgHandler;
 
-export type DefaultHandlerName = "css-mask" | "vue-css-mask" | "vue-inline" ;
-export const defaultHandler: Record<DefaultHandlerName, CreateHandler> = {
+export type HandlerName = "css-mask" | "vue-css-mask" | "vue-inline" ;
+export const defaultHandler: Record<HandlerName, CreateHandler> = {
   "css-mask": (c) => new CssMaskHandler(c),
   "vue-css-mask": (c) => new VueCssMaskHandler(c),
   "vue-inline": (c) => new VueInlineHandler(c),

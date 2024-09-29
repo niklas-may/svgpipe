@@ -1,5 +1,5 @@
 <template>
-  <i class="svg-icon" :class="name"></i>
+  <i class="svg-logo" :class="`-svg-logo-${name}`"></i>
 </template>
 <script setup lang="ts">
 import type { SvgLogo } from "../types/logo-types";

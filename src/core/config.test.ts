@@ -5,52 +5,38 @@ import { join } from "path";
 describe("[Config]", () => {
   const snapshotDir = "./__test__/snapshot/config";
 
-  it("UserConfig to Config should match snapshot", () => {
+  it("Paths from UserConfig to Config should match snapshot", () => {
     const userConfig = defineConfig({
       baseOut: "./svgpipe",
       modules: {
-        lorem: {
-          handler: "vue-inline",
-          prepareName: (name) => name,
-          tokenPath: "/my-tokenPath",
-          typePath: "/my-typePath",
-          in: "/my-in",
-          out: "/my-out",
-          svgo: {
-            replace: false,
-            config: {
-              plugins: [
-                {
-                  name: "removeDoctype",
-                },
-              ],
-            },
-          },
-        },
-        ipsum: {
-          handler: () => ({}),
-          prepareName: (name) => name,
-          ignoreBase: true,
-          tokenPath: "/my-tokenPath",
-          typePath: "/my-typePath",
-          in: "/my-in",
-          out: "/my-out",
-          svgo: {
-            replace: true,
-            config: {
-              plugins: [
-                {
-                  name: "removeDoctype",
-                },
-              ],
-            },
-          },
-        },
         dolor: "vue-inline",
+        ipsum: {
+          in: "/my-in",
+          out: "/my-out",
+          tokenPath: "/my-tokenPath",
+          typePath: "/my-typePath",
+          handler: "vue-inline",
+        },
+        lorem: {
+          ignoreBase: true,
+          in: "/my-in",
+          out: "/my-out",
+          tokenPath: "/my-tokenPath",
+          typePath: "/my-typePath",
+          handler: "vue-inline",
+        },
+        salip: {
+          ignoreBase: true,
+          in: "/my-in",
+          out: "/my-out",
+          tokenPath: "",
+          typePath: "",
+          handler: "vue-inline",
+        },
       },
     });
 
     const config = createConfig(userConfig);
-    expect(config).toMatchFileSnapshot(join(snapshotDir, "config.text"));
+    expect(JSON.parse(JSON.stringify(config))).toMatchFileSnapshot(join(snapshotDir, "config.text"));
   });
 });

@@ -10,12 +10,12 @@ import { CssMaskHandler } from "./css-mask-handler";
 
 export class VueCssMaskHandler implements ISvgHandler {
   private file;
-  private cssFileHandler: CssMaskHandler;
+  private cssMaskHandler: CssMaskHandler;
   config: SvgoConfig;
 
   constructor(private readonly mConfig: ModuleConfig) {
-    this.cssFileHandler = new CssMaskHandler(mConfig);
-    this.config = this.cssFileHandler.config;
+    this.cssMaskHandler = new CssMaskHandler(mConfig);
+    this.config = this.cssMaskHandler.config;
 
     this.file = new File({
       name: pascalCase("Svg " + this.mConfig.name),
@@ -25,12 +25,11 @@ export class VueCssMaskHandler implements ISvgHandler {
   }
 
   onFile(svg: File) {
-    this.cssFileHandler.onFile(svg);
-    return svg;
+    this.cssMaskHandler.onFile(svg);
   }
 
   onEnd(ctx: Context) {
-    const cssReturn = this.cssFileHandler.onEnd(ctx);
+    const cssReturn = this.cssMaskHandler.onEnd(ctx);
     const cssFile = cssReturn.find((f) => f.extension === "css")!;
 
     this.file.content = this.getFileContent(ctx, cssFile?.content);
@@ -41,7 +40,7 @@ export class VueCssMaskHandler implements ISvgHandler {
   private getFileContent({ type }: Context, css: string) {
     return `
     <template>
-      <i class="svg-icon" :class="name"></i>
+      <i class="svg-${this.mConfig.name}" :class="\`-svg-${this.mConfig.name}-\${name}\`"></i>
     </template>
     <script setup lang="ts">
       import type {${type.name} } from "${this.file.relPathTo(type.file, false)}"

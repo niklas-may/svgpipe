@@ -50,13 +50,13 @@ export class CssMaskHandler implements ISvgHandler {
     });
   }
 
-  onEnd(ctx: Context) {
-    this.file.content = this.getFileContent(ctx);
+  onEnd(_: Context) {
+    this.file.content = this.getFileContent();
 
     return [this.file];
   }
 
-  private getFileContent({ type }: Context) {
+  private getFileContent() {
     return `
       .${this.className} {
         --size: 1em;
@@ -74,7 +74,7 @@ export class CssMaskHandler implements ISvgHandler {
       ${this.vars.map((v) => this.getSvgDeclaration(v)).join("\n")}
 
       :root {
-        ${this.vars.map((v) => this.getVarDeclaration(v)).join(";\n        ")}
+        ${this.vars.map((v) => this.getVarDeclaration(v)).join(";\n")}
       }
     `;
   }

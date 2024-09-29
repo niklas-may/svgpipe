@@ -1,5 +1,5 @@
 import type { Config as SvgoConfig } from "svgo";
-import type { CreateHandler, DefaultHandlerName } from "./handler";
+import type { CreateHandler, HandlerName } from "./handler";
 
 import { join } from "path";
 import { defaultHandler } from "./handler";
@@ -7,7 +7,8 @@ import { defaultHandler } from "./handler";
 export type UserConfig = {
   baseOut?: string;
   baseIn?: string;
-  modules: Record<string, UserModuleConfig | DefaultHandlerName>;
+  cleanup?: boolean;
+  modules: Record<string, UserModuleConfig | HandlerName>;
 };
 
 export type UserModuleConfig = {
@@ -22,7 +23,7 @@ export type UserModuleConfig = {
     stdout?: boolean;
   };
   prepareName?: (name: string) => string;
-  handler: CreateHandler | DefaultHandlerName;
+  handler: CreateHandler | HandlerName;
 };
 
 export type ModuleConfig = {
@@ -50,15 +51,15 @@ export function createConfig(config: UserConfig): Record<string, ModuleConfig> {
     const basePath = module.ignoreBase ? "" : (config.baseOut ?? "svgpipe");
     const inPath = join(basePath, module.in || `in/${name}`);
 
-    const outFolder = module.ignoreBase ? "" : ".out";
+    const outFolder = module.ignoreBase ? (module.out ?? "") : (module.out ?? ".out");
     const outPath = join(basePath, outFolder);
 
     res[name] = {
       name: name,
       in: inPath,
       out: outPath,
-      typePath: join(outPath, module.typePath || "/types"),
-      tokenPath: join(outPath, module.tokenPath || "/tokens"),
+      typePath: module.typePath === "" ? "" : join(module.ignoreBase ? "" : outPath, module.typePath || "/types"),
+      tokenPath: module.tokenPath === "" ? "" : join(module.ignoreBase ? "" : outPath, module.tokenPath || "/tokens"),
       ignoreBase: !!module.ignoreBase,
       svgo: {
         config: module.svgo?.config ?? {},
