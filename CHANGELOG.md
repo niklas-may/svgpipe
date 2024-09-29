@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.18
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.17...v0.0.18)
+
+### 🩹 Fixes
+
+- Print svgo correctyl to console ([07f1af7](https://github.com/niklas-may/svgpipe/commit/07f1af7))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.17
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.16...v0.0.17)
