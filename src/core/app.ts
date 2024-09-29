@@ -24,7 +24,8 @@ export async function runApp(userConfig: UserConfig): Promise<AppInfo> {
 
   for (const [moduleName, module] of Object.entries(config)) {
     const moduleConfig = config[moduleName];
-    const handler = module.handler(moduleConfig);
+    const handler = moduleConfig.handler(moduleConfig);
+    const svgoConfig = moduleConfig.svgo.config;
 
     const handlerContext: Context = {
       type: new TypeHandler(moduleConfig),
@@ -33,9 +34,7 @@ export async function runApp(userConfig: UserConfig): Promise<AppInfo> {
 
     const paths = getSvgPaths(moduleConfig.in);
 
-    const svgoConfig = moduleConfig.svgo.replace
-      ? moduleConfig.svgo.config
-      : defu(handler.config, moduleConfig.svgo.config);
+
 
     for (const path of paths) {
       const rawSvg = readFileSync(path, "utf-8");

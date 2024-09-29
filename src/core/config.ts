@@ -3,6 +3,7 @@ import type { CreateHandler, HandlerName } from "./handler";
 
 import { join } from "path";
 import { defaultHandler } from "./handler";
+import defu from "defu";
 
 export type UserConfig = {
   baseOut?: string;
@@ -64,10 +65,17 @@ export function createConfig(config: UserConfig): Record<string, ModuleConfig> {
       svgo: {
         config: module.svgo?.config ?? {},
         replace: module.svgo?.replace ?? false,
+        stdout: module.svgo?.stdout ?? false,
       },
       handler: module.handler,
       prepareName: module.prepareName,
     };
+
+    // TODO: This is a bit of a hack, but it works for now
+    const handler = res[name].handler(res[name]);
+    res[name].svgo.config = res[name].svgo.replace
+    ? res[name].svgo.config
+    : defu(handler.config, res[name].svgo.config);
   }
   return res;
 }

@@ -37,6 +37,10 @@ describe("[Config]", () => {
     });
 
     const config = createConfig(userConfig);
-    expect(JSON.parse(JSON.stringify(config))).toMatchFileSnapshot(join(snapshotDir, "config.text"));
+    for (const [_, module] of Object.entries(config)) {
+      // @ts-ignore
+      delete module.handler;
+    }
+    expect(config).toMatchFileSnapshot(join(snapshotDir, "config.text"));
   });
 });

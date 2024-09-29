@@ -28,7 +28,7 @@ export function report({ fileReports, config }: AppInfo) {
   for (const [moduleName, module] of Object.entries(config)) {
     if (module.svgo.stdout) {
       logger.info(`Svgo config for "${moduleName}"`);
-      logger.info(JSON.stringify(module.svgo.config));
+      logger.info(JSON.stringify(module.svgo.config, null, 2));
     }
   }
 }

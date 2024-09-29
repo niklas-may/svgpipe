@@ -4,9 +4,31 @@
     "in": "svgpipe/in/dolor",
     "name": "dolor",
     "out": "svgpipe/.out",
+    "prepareName": undefined,
     "svgo": {
-      "config": {},
+      "config": {
+        "multipass": true,
+        "plugins": [
+          "removeDimensions",
+          "sortAttrs",
+          "removeTitle",
+          "cleanupIds",
+          {
+            "name": "prefixIds",
+            "params": {
+              "prefix": [Function],
+            },
+          },
+          {
+            "name": "convertColors",
+            "params": {
+              "currentColor": true,
+            },
+          },
+        ],
+      },
       "replace": false,
+      "stdout": false,
     },
     "tokenPath": "svgpipe/.out/tokens",
     "typePath": "svgpipe/.out/types",
@@ -16,9 +38,31 @@
     "in": "svgpipe/my-in",
     "name": "ipsum",
     "out": "svgpipe/my-out",
+    "prepareName": undefined,
     "svgo": {
-      "config": {},
+      "config": {
+        "multipass": true,
+        "plugins": [
+          "removeDimensions",
+          "sortAttrs",
+          "removeTitle",
+          "cleanupIds",
+          {
+            "name": "prefixIds",
+            "params": {
+              "prefix": [Function],
+            },
+          },
+          {
+            "name": "convertColors",
+            "params": {
+              "currentColor": true,
+            },
+          },
+        ],
+      },
       "replace": false,
+      "stdout": false,
     },
     "tokenPath": "svgpipe/my-out/my-tokenPath",
     "typePath": "svgpipe/my-out/my-typePath",
@@ -28,9 +72,31 @@
     "in": "/my-in",
     "name": "lorem",
     "out": "/my-out",
+    "prepareName": undefined,
     "svgo": {
-      "config": {},
+      "config": {
+        "multipass": true,
+        "plugins": [
+          "removeDimensions",
+          "sortAttrs",
+          "removeTitle",
+          "cleanupIds",
+          {
+            "name": "prefixIds",
+            "params": {
+              "prefix": [Function],
+            },
+          },
+          {
+            "name": "convertColors",
+            "params": {
+              "currentColor": true,
+            },
+          },
+        ],
+      },
       "replace": false,
+      "stdout": false,
     },
     "tokenPath": "/my-tokenPath",
     "typePath": "/my-typePath",
@@ -40,9 +106,31 @@
     "in": "/my-in",
     "name": "salip",
     "out": "/my-out",
+    "prepareName": undefined,
     "svgo": {
-      "config": {},
+      "config": {
+        "multipass": true,
+        "plugins": [
+          "removeDimensions",
+          "sortAttrs",
+          "removeTitle",
+          "cleanupIds",
+          {
+            "name": "prefixIds",
+            "params": {
+              "prefix": [Function],
+            },
+          },
+          {
+            "name": "convertColors",
+            "params": {
+              "currentColor": true,
+            },
+          },
+        ],
+      },
       "replace": false,
+      "stdout": false,
     },
     "tokenPath": "",
     "typePath": "",
