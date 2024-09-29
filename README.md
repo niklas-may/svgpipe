@@ -28,7 +28,7 @@ export Default defineConfig({
   modules: {
     // load SVGs from "./svgpipe/in/logo and process with 'css-mask' handler"
     logo: "css-mask",
-    // load svg from "./svgpipe/in/icon" and apply custom handler
+    // load SVGs from "./svgpipe/in/icon" and apply custom handler
     icon: {
       handler: (conf) => ({})
     }
