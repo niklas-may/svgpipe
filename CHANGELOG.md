@@ -1,6 +1,18 @@
 # Changelog
 
 
+## v0.0.17
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.16...v0.0.17)
+
+### 🩹 Fixes
+
+- Div updates and fixes ([96c3398](https://github.com/niklas-may/svgpipe/commit/96c3398))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.16
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.15...v0.0.16)
