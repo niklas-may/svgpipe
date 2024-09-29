@@ -1,6 +1,6 @@
 {
   "name": "svgpipe",
-  "version": "0.0.18",
+  "version": "0.0.19",
   "description": "A flexible CLI tool around svgo for further postprocessing.",
   "keywords": [
     "svg",
