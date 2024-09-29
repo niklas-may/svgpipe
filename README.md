@@ -62,24 +62,24 @@ npx svgpipe run
 
 ### Module
 
-| Property      | Type                       | Default                      |  Description                                                                                    |
-| :------------ | :------------------------- | :--------------------------- | :---------------------------------------------------------------------------------------------- |
-| `in`?         | `string`                   | {baseIn}/{objectKeyOfModule} | Folder where the SVGs for this module are. If undefined, the module key will be used.           |
-| `out`?        | `string`                   | {baseOut}                    | Folder for ouput.                                                                               |
-| `typePath`?   | `string`                   | {baseOut}/types              | Folder for the TypeScript type file. This has a type with all the SVG names as string literals. |
-| `tokenPath`?  | `string`                   | {baseOut}/token              | Folder for the TypeScript token file. This has a variable with an array with all SVG names.     |
-| `ignoreBase`? | `boolean`                  | false                        | Don't prepend the base path.                                                                    |
-| `svgo`?       | `UserModuleConfig["svgo"]` | {}                           | SVGO Options.                                                                                   |
+| Property       | Type                       | Default                      |  Description                                                                                    |
+| :------------- | :------------------------- | :--------------------------- | :---------------------------------------------------------------------------------------------- |
+| `in`?          | `string`                   | {baseIn}/{objectKeyOfModule} | Folder where the SVGs for this module are. If undefined, the module key will be used.           |
+| `out`?         | `string`                   | {baseOut}                    | Folder for ouput.                                                                               |
+| `typePath`?    | `string`                   | {baseOut}/types              | Folder for the TypeScript type file. This has a type with all the SVG names as string literals. |
+| `tokenPath`?   | `string`                   | {baseOut}/token              | Folder for the TypeScript token file. This has a variable with an array with all SVG names.     |
+| `ignoreBase`?  | `boolean`                  | false                        | Don't prepend the base path.                                                                    |
+| `prepareName`? | `(str: string) => string`  |                              | Modify the svg file name. The name will be used for types, classes e.g.                         |
+| `handler`      | `CreateHandler`            |                              | The actual svg handle.                                                                          |
+| `svgo`?        | `UserModuleConfig["svgo"]` | {}                           | SVGO Options.                                                                                   |
 
 #### SVGO
 
-| Property       | Type                      | Default | Description                                                             |
-| :------------- | :------------------------ | :------ | :---------------------------------------------------------------------- |
-| `config`?      | `SvgoConfig`              | {}      | SVGO Config.                                                            |
-| `replace`?     | `boolean`                 | false   | Opt out of default config merging.                                      |
-| `stdout`?      | `boolean`                 | false   | Print the config to the console.                                        |
-| `prepareName`? | `(str: string) => string` |         | Modify the svg file name. The name will be used for types, classes e.g. |
-| `handler`      | `CreateHandler`           |         | The actual svg handle.                                                  |
+| Property   | Type         | Default | Description                        |
+| :--------- | :----------- | :------ | :--------------------------------- |
+| `config`?  | `SvgoConfig` | {}      | SVGO Config.                       |
+| `replace`? | `boolean`    | false   | Opt out of default config merging. |
+| `stdout`?  | `boolean`    | false   | Print the config to the console.   |
 
 ## Custom Handler
 
