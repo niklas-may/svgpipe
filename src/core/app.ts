@@ -6,7 +6,6 @@ import { kebabCase } from "change-case-all";
 import { extname, join, parse, resolve } from "path";
 import { optimize } from "svgo";
 import { promises, readdirSync, readFileSync, statSync } from "fs";
-import { defu } from "defu";
 import { TypeHandler } from "../handler/type-handler";
 import { TokenHandler } from "../handler/token-handler";
 import { createConfig } from "./config";
@@ -33,8 +32,6 @@ export async function runApp(userConfig: UserConfig): Promise<AppInfo> {
     };
 
     const paths = getSvgPaths(moduleConfig.in);
-
-
 
     for (const path of paths) {
       const rawSvg = readFileSync(path, "utf-8");
