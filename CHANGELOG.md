@@ -1,6 +1,22 @@
 # Changelog
 
 
+## v0.0.20
+
+[compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.19...v0.0.20)
+
+### 💅 Refactors
+
+- IFile is now IWriter and in line with path.parse naming ([38d697a](https://github.com/niklas-may/svgpipe/commit/38d697a))
+
+### 🎨 Styles
+
+- Cleanup ([1b7fa4d](https://github.com/niklas-may/svgpipe/commit/1b7fa4d))
+
+### ❤️ Contributors
+
+- Niklas May <post@niklas-may.de>
+
 ## v0.0.19
 
 [compare changes](https://github.com/niklas-may/svgpipe/compare/v0.0.18...v0.0.19)
