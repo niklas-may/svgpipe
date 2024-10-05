@@ -33,8 +33,8 @@ export class VueInlineHandler implements ISvgHandler {
   constructor(private readonly mConfig: ModuleConfig) {
     this.file = new File({
       name: pascalCase("Svg " + this.mConfig.name),
-      extension: "vue",
-      path: join(this.mConfig.out, "components"),
+      ext: "vue",
+      dir: join(this.mConfig.out, "components"),
     });
   }
 

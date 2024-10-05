@@ -1,6 +1,6 @@
 import type { ModuleConfig } from "../core/config";
 import type { Context, ISvgHandler } from "../core/handler";
-import type { IFile } from "../core/file";
+import type { IWriter } from "../core/writer";
 
 import { kebabCase, camelCase } from "change-case-all";
 import { File } from "../core/file";
@@ -12,12 +12,12 @@ export class TokenHandler implements ISvgHandler {
   constructor(private readonly mConfig: ModuleConfig) {
     this.file = new File({
       name: kebabCase(this.mConfig.name + "-tokens"),
-      extension: "ts",
-      path: this.mConfig.tokenPath,
+      ext: "ts",
+      dir: this.mConfig.tokenPath,
     });
   }
 
-  onFile(file: IFile) {
+  onFile(file: IWriter) {
     this.tokens.push(`"${file.name}"`);
     return file;
   }

@@ -1,17 +1,16 @@
 import type { AppInfo } from "./app";
-import type { IFileWriteReport } from "./file";
+import type { WriterReport } from "./writer";
 
 import { createConsola} from "consola";
-import { FileWriteStatus } from "./file";
 
 export function report({ fileReports, config }: AppInfo) {
   let logger = createConsola({ fancy: true }).withTag("SvgPipe");
   let success = 0;
-  const errors: IFileWriteReport[] = [];
+  const errors: WriterReport[] = [];
 
   for (const file of fileReports) {
     
-    if (file.status === FileWriteStatus.success) {
+    if (file.status === "success") {
       success++;
     } else {
       errors.push(file);

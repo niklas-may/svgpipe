@@ -49,8 +49,8 @@ const initCommand = defineCommand({
     const basePath = path.resolve((args?.out as string) ?? process.cwd());
     const configFile = new File({
       name: "svgpipe.config",
-      extension: "ts",
-      path: basePath,
+      ext: "ts",
+      dir: basePath,
       content: `
         import { defineConfig } from "svgpipe";
 

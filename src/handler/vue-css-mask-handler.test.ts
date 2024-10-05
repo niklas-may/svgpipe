@@ -19,8 +19,8 @@ describe("[vue-inline-handler]", () => {
     })
     const report = await runApp(userConfig); 
 
-    const componentReport = report.fileReports.find((f) => f.file.extension === "vue");
-    expect(componentReport?.file.content).toMatchFileSnapshot(join(snapshotDir, "vue-css-mask.vue.txt"));
+    const componentReport = report.fileReports.find((f) => f.writer.ext === "vue");
+    expect(componentReport?.writer.content).toMatchFileSnapshot(join(snapshotDir, "vue-css-mask.vue.txt"));
   });
 
 });

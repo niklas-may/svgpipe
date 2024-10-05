@@ -36,8 +36,8 @@ export class CssMaskHandler implements ISvgHandler {
   constructor(private readonly mConfig: ModuleConfig) {
     this.file = new File({
       name: pascalCase("svg " + this.mConfig.name),
-      extension: "css",
-      path: join(this.mConfig.out, "css"),
+      ext: "css",
+      dir: join(this.mConfig.out, "css"),
     });
   }
 

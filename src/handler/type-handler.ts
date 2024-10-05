@@ -1,5 +1,5 @@
 import type { Context, ISvgHandler } from "../core/handler";
-import type { IFile } from "../main";
+import type { IWriter } from "../core/writer";
 import type { ModuleConfig } from "../core/config";
 
 import { pascalCase, kebabCase } from "change-case-all";
@@ -12,8 +12,8 @@ export class TypeHandler implements ISvgHandler {
   constructor(private readonly mConfig: ModuleConfig) {
     this.file = new File({
       name: kebabCase(this.mConfig.name + "-types"),
-      extension: "ts",
-      path: this.mConfig.typePath,
+      ext: "ts",
+      dir: this.mConfig.typePath,
     });
   }
 
@@ -25,7 +25,7 @@ export class TypeHandler implements ISvgHandler {
     return this.valuesArr.join(" | ");
   }
 
-  onFile(svg: IFile) {
+  onFile(svg: IWriter) {
     this.valuesArr.push(`"${kebabCase(svg.name)}"`);
     return svg;
   }

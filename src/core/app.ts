@@ -1,5 +1,5 @@
 import type { Context } from "./../core/handler";
-import type { IFileWriteReport } from "./file";
+import type { WriterReport } from "./writer";
 import type { ModuleConfig, UserConfig } from "./config";
 
 import { kebabCase } from "change-case-all";
@@ -14,12 +14,12 @@ import { File } from "./file";
 export type AppInfo = {
   userConfig: UserConfig;
   config: Record<string, ModuleConfig>;
-  fileReports: IFileWriteReport[];
+  fileReports: WriterReport[];
 };
 
 export async function runApp(userConfig: UserConfig): Promise<AppInfo> {
   const config = createConfig(userConfig);
-  const files: Promise<IFileWriteReport>[] = [];
+  const files: Promise<WriterReport>[] = [];
 
   for (const [moduleName, module] of Object.entries(config)) {
     const moduleConfig = config[moduleName];
@@ -40,9 +40,9 @@ export async function runApp(userConfig: UserConfig): Promise<AppInfo> {
 
       const svgFile = new File({
         name: kebabCase(moduleConfig.prepareName ? moduleConfig.prepareName(name) : name),
-        path: join(moduleConfig.out, "svgs", module.name),
+        dir: join(moduleConfig.out, "svgs", module.name),
         content: data,
-        extension: "svg",
+        ext: "svg",
       });
 
       handlerContext.type.onFile(svgFile);
@@ -77,10 +77,14 @@ function getSvgPaths(dir: string) {
   return res;
 }
 
-async function cleanup(config: Record<string, ModuleConfig>, report: IFileWriteReport[]) {
+async function cleanup(config: Record<string, ModuleConfig>, report: WriterReport[]) {
   const delets: Promise<any>[] = [];
   const outPaths = Object.values(config).map((c) => c.out);
-  const filePaths = report.map((r) => r.path);
+  const filePaths = report
+    .map((r) => {
+      if (r.writer instanceof File) return r.writer.resoledPath;
+    })
+    .filter(Boolean);
 
   for (const oP of outPaths) {
     const filePath = await promises.readdir(oP, { recursive: true }).then((fileOrDir) => {
@@ -92,7 +96,7 @@ async function cleanup(config: Record<string, ModuleConfig>, report: IFileWriteR
     });
 
     for (const file of filePath) {
-      if (!filePaths.some((f) => f.endsWith(file))) {
+      if (!filePaths.some((f) => f && f.endsWith(file))) {
         delets.push(promises.unlink(join(oP, file)));
       }
     }

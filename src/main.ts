@@ -1,5 +1,5 @@
 export type { Config as SvgoConfig } from "svgo";
-export type { IFile } from "./core/file";
+export type { IWriter } from "./core/writer";
 export type { CreateHandler } from "./core/handler";
 export type { ModuleConfig } from "./core/config";
 

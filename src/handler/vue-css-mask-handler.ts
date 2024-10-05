@@ -19,8 +19,8 @@ export class VueCssMaskHandler implements ISvgHandler {
 
     this.file = new File({
       name: pascalCase("Svg " + this.mConfig.name),
-      extension: "vue",
-      path: join(this.mConfig.out, "components"),
+      ext: "vue",
+      dir: join(this.mConfig.out, "components"),
     });
   }
 
@@ -30,7 +30,7 @@ export class VueCssMaskHandler implements ISvgHandler {
 
   onEnd(ctx: Context) {
     const cssReturn = this.cssMaskHandler.onEnd(ctx);
-    const cssFile = cssReturn.find((f) => f.extension === "css")!;
+    const cssFile = cssReturn.find((f) => f.ext === "css")!;
 
     this.file.content = this.getFileContent(ctx, cssFile?.content);
 

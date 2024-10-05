@@ -1,5 +1,5 @@
 import type { Config as SvgoConfig } from "svgo";
-import type { IFile } from "./file";
+import type { IWriter } from "./writer";
 import type { ModuleConfig } from "./config";
 
 import { TokenHandler } from "../handler/token-handler";
@@ -11,8 +11,8 @@ import { VueCssMaskHandler } from "../handler/vue-css-mask-handler";
 
 export interface ISvgHandler {
   config?: SvgoConfig;
-  onFile?: (svgFile: File) => IFile | void;
-  onEnd?: (context: Context) => IFile[] | void;
+  onFile?: (svgFile: File) => IWriter | void;
+  onEnd?: (context: Context) => IWriter[] | void;
 }
 
 export type Context = {

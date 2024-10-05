@@ -110,7 +110,7 @@ Will be called for every processed input svg file. Retrun the file if you want t
 
 ### `onEnd`
 
-Will be called with the `Context` after all SVGs are processed. Return nothing or `IFile[]` with additional files that you want to write to disk. `Context` provides a type handler that creates a TypeScript type file for the module and a corresponding token handler.
+Will be called with the `Context` after all SVGs are processed. Return nothing or `IWriter[]` with additional files that you want to write to disk. `Context` provides a type handler that creates a TypeScript type file for the module and a corresponding token handler.
 
 ### `config`
 

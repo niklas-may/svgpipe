@@ -1,93 +1,69 @@
+import type { IWriter, WriterReport } from "./writer";
+
 import path from "node:path";
 import { existsSync, promises, mkdirSync } from "node:fs";
 import * as prettier from "prettier";
 
-export interface IFileArgs {
-  extension: string;
+export class File implements IWriter {
+  ext: string;
   name: string;
-  path: string;
-  content?: string;
-}
-
-export interface IFile extends IFileArgs {
-  fullPath: string;
-  fullFilePath: string;
-  write: () => Promise<IFileWriteReport>;
-}
-
-export interface IFileWriteReport {
-  status: FileWriteStatus;
-  path: string;
-  message?: string;
-  detail?: unknown;
-  file: IFile;
-}
-
-export enum FileWriteStatus {
-  "success",
-  "error",
-}
-
-export class File implements IFile {
-  extension: string;
-  name: string;
-  path: string;
+  dir: string;
   content: string = "";
+  path: string;
 
-  constructor(args: IFileArgs) {
-    this.extension = args.extension;
+  constructor(args: { name: string; ext: string; dir: string; content?: string }) {
+    this.ext = args.ext;
     this.name = args.name;
-    this.path = args.path;
+    this.dir = args.dir;
     this.content = args.content ?? "";
+    this.path = path.join(this.dir, `${this.name}.${this.ext}`);
   }
 
-  get fullPath() {
-    return path.resolve(this.path);
+  get resolvedDir() {
+    return path.resolve(this.dir);
   }
 
-  get fullFilePath() {
-    return path.join(this.fullPath, `${this.name}.${this.extension}`);
+  get resoledPath() {
+    return path.join(this.path);
   }
 
   get basename() {
-    return path.basename(this.fullFilePath);
+    return path.basename(this.resoledPath);
   }
 
   relPathTo(file: File, extension = true) {
-    const res = path.relative(this.fullPath, file.fullFilePath);
+    const res = path.relative(this.resolvedDir, file.resoledPath);
 
     return extension ? res : res.substring(0, res.lastIndexOf("."));
   }
 
-  async write() {
-    if (!existsSync(this.fullPath)) {
-      mkdirSync(this.fullPath, { recursive: true });
+  async write(): Promise<WriterReport<File>> {
+    if (!existsSync(this.resolvedDir)) {
+      mkdirSync(this.resolvedDir, { recursive: true });
     }
 
     try {
       await this.prettify();
-      await promises.writeFile(this.fullFilePath, this.content);
+      await promises.writeFile(this.resoledPath, this.content);
 
       return {
-        status: FileWriteStatus.success,
-        path: this.fullFilePath,
-        file: this as File,
+        status: "success" as const,
+        writer: this as File,
       };
     } catch (error) {
       return {
-        status: FileWriteStatus.error,
-        path: this.fullFilePath,
+        status: "error" as const,
         message: "Error while writing file",
         detail: error,
-        file: this as File,
+        writer: this as File,
       };
     }
   }
 
   private async prettify() {
     try {
-      if (this.extension !== "svg") {
-        this.content = await prettier.format(this.content, { filepath: this.fullFilePath });
+      if (this.ext !== "svg") {
+        this.content = await prettier.format(this.content, { filepath: this.resoledPath });
       }
     } catch (error) {}
   }

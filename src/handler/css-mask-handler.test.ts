@@ -1,4 +1,3 @@
-
 import { describe, expect, it } from "vitest";
 import { join } from "path";
 import { runApp } from "../core/app";
@@ -16,11 +15,10 @@ describe("[css-mask handler]", () => {
       modules: {
         logo: "css-mask",
       },
-    })
-    const info = await runApp(userConfig); 
+    });
+    const info = await runApp(userConfig);
 
-    const componentReport = info.fileReports.find((f) => f.file.extension === "css");
-    expect(componentReport?.file.content).toMatchFileSnapshot(join(snapshotDir, "css-mask.css.txt"));
+    const componentReport = info.fileReports.find((f) => f.writer.ext === "css");
+    expect(componentReport?.writer.content).toMatchFileSnapshot(join(snapshotDir, "css-mask.css.txt"));
   });
-
 });

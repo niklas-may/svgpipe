@@ -19,14 +19,14 @@ describe("[vue-inline-handler]", () => {
     })
     const report = await runApp(userConfig); 
 
-    const componentReport = report.fileReports.find((f) => f.file.extension === "vue");
-    expect(componentReport?.file.content).toMatchFileSnapshot(join(snapshotDir, "vue-inline.vue.txt"));
+    const componentReport = report.fileReports.find((f) => f.writer.ext === "vue");
+    expect(componentReport?.writer.content).toMatchFileSnapshot(join(snapshotDir, "vue-inline.vue.txt"));
 
-    const typeFile = report.fileReports.find((f) =>  f.file.name.endsWith("-types"));
-    expect(typeFile?.file.content).toMatchFileSnapshot(join(snapshotDir, "types.ts.txt"));
+    const typeFile = report.fileReports.find((f) =>  f.writer.name.endsWith("-types"));
+    expect(typeFile?.writer.content).toMatchFileSnapshot(join(snapshotDir, "types.ts.txt"));
 
-    const tokenFile = report.fileReports.find((f) => f.file.name.endsWith("-tokens"));
-    expect(tokenFile?.file.content).toMatchFileSnapshot(join(snapshotDir, "tokens.ts.txt"));
+    const tokenFile = report.fileReports.find((f) => f.writer.name.endsWith("-tokens"));
+    expect(tokenFile?.writer.content).toMatchFileSnapshot(join(snapshotDir, "tokens.ts.txt"));
   });
 
 });

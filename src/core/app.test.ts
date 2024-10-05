@@ -4,7 +4,6 @@ import { describe, expect, it } from "vitest";
 import { join } from "path";
 import { runApp } from "./app";
 import { defineConfig } from "./config";
-import { report } from "./reporter";
 
 describe("[App]", () => {
   const baseOut = join("./__test__/svgpipe");
@@ -32,7 +31,7 @@ describe("[App]", () => {
         baseOut,
         modules: {
           logo: {
-            handler: () => ({}),
+            handler: () => ({onFile: file => file}),
           },
         },
       }),
